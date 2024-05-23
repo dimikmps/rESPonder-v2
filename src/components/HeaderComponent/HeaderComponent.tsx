@@ -23,7 +23,7 @@ const HeaderMenuLink = styled(Link)({
 });
 
 /*
- * Main Header Component 
+ * Main Header Component
  **/
 const HeaderComponent = () => {
     return (
