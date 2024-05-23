@@ -34,8 +34,8 @@ const HeaderComponent = () => {
                 gap="100px"
                 width="100%"
             >
-                {mockMenuList.map((menuItem: string) => {
-                    return <HeaderMenuLink href="#">{menuItem}</HeaderMenuLink>;
+                {mockMenuList.map((menuItem: string, index: number) => {
+                    return <HeaderMenuLink href="#" key={index}>{menuItem}</HeaderMenuLink>;
                 })}
             </Box>
             <Box display="flex" minWidth="max-content">
