@@ -7,23 +7,12 @@
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "npx eslint ."
+    "lint": "eslint ./src"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run lint"
     }
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{html,css,less,ejs}": [
-      "prettier --write",
-      "git add"
-    ]
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
