@@ -1,7 +1,7 @@
 import { Box, Link, Typography } from '@mui/material';
 
 /*
- * Footer Component
+ * Main Footer Component
  **/
 const FooterComponent = () => {
     return (
