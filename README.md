@@ -70,8 +70,6 @@ At the Cloud domain a set of Lambda functions is used to calculate distance from
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
 * [![React][React.js]][React-url]
 * [![MUI][MUI]][MUI-url]
 * [![Vite][Vite]][Vite-url]
@@ -95,6 +93,9 @@ A latest version of npm is needed to install all necessary packages and run the 
   ```sh
   npm install npm@latest -g
   ```
+
+It is recommended to use node v.20.13.1 .
+
 
 ### Installation & deployment
 
