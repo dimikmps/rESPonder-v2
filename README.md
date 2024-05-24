@@ -163,7 +163,7 @@ See the [open issues](https://github.com/dimikmps/rESPonder-v2/issues) for a ful
 <!-- CONTACT -->
 ## Contact
 
-Dimitris Kampas - [LinkedIn](https://www.linkedin.com/feed/)
+Dimitris Kampas - [LinkedIn][linkedin-url]
 
 Project Link: [https://github.com/dimikmps/rESPonder-v2](https://github.com/dimikmps/rESPonder-v2)
 
