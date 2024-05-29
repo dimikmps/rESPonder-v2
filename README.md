@@ -141,8 +141,9 @@ Follow the steps below to get the project up and running:
 - [x] Linting/formatting
   - [x] Add formatting configuration
   - [x] Add pre-commit linting and formatting
-- Sensor Data
+- [ ] Sensor Data
   - [ ] Create mock sensor dataset to be used for the purpose of the live demo
+  - [ ] Create mock API to poll sensor data
 - [ ] App sections
   - Latest sensor readings view
     - [ ] Add latest sensor readings page
