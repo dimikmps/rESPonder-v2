@@ -1,9 +1,22 @@
+import { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import FooterComponent from './components/FooterComponent/FooterComponent';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import './App.css';
+import { SensorData } from './mocks/mockResponse';
 
 function App() {
+  const [mockData, setMockData] = useState<SensorData[] | null>(null);
+
+  // TODO: Remove this from here - Tests msw mocking functionality
+  useEffect(() => {
+    fetch('http://localhost:5173/api/v1/module-1')
+      .then((res) => res.json())
+      .then((res) => {
+        setMockData(res);
+      });
+  }, []);
+
   return (
     <Box
       display="flex"
@@ -41,6 +54,18 @@ function App() {
         </Box>
         <Typography display="flex" justifyContent="center" fontSize="20px">
           An IoT application for disaster rescue scenarios
+        </Typography>
+        {/* TODO: Replace/remove this once a proper loading modal and view/component have been implemented*/}
+        <Typography
+          display="flex"
+          justifyContent="center"
+          variant="subtitle1"
+          fontSize={10}
+          fontStyle="italic"
+        >
+          {!mockData
+            ? 'Sensor data not loaded...'
+            : 'Sensor 1 data sucessfully loaded!'}
         </Typography>
       </Box>
       <FooterComponent />
