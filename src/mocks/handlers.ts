@@ -11,5 +11,5 @@ export const handlers = [
 
     // Return an HTTP response out of the mocked data
     return HttpResponse.json(generateMockResponse());
-  })
+  }),
 ];
