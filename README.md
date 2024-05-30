@@ -57,11 +57,13 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-rESPonder is the client-facing segment of a multi-tier Internet of Things (IoT) application, aimed at assisting emergency services in organizing and managing disaster relief situations. The current (v2) implementation is an updated version of the original front-end implementation, serving to demonstrate the final product and the application's overall functionality/purpose in a better and more user-friendly manner.
+rESPonder is the client-facing segment of a multi-tier Internet of Things (IoT) application, aimed at assisting emergency services in organizing and managing disaster relief situations. 
 
 As the name suggests, the platform benefits from the use of ESP32 microcontrolers (i.e. r-ESP-onder) as the basis of data acquisition. Overall, a network of autonomous ESP32 microcontrollers is programmed to detect Wi-Fi devices within their vicinity, with various metrics such as RSSI being gathered and transmitted via LoRa to a custom ESP32-based centralized node. The latter in turn relays the data via MQTT to AWS where it's handled and stored with IoT Core and DynamoDB respectively.
 
 At the Cloud domain a set of Lambda functions is used to calculate distance from deployed ESP nodes by executing a set of RSSI-based proximity calculation formulae, while an API serves this information to the rESPonder front-end client, which originally is hosted on S3.
+
+The current (v2) implementation is an updated version of the original front-end implementation, serving to demonstrate the final product and the application's overall functionality/purpose in a better and more user-friendly manner. It makes use of Mock Service Worker to fetch randomised sensor data periodically, as the original deployment of ESP sensors & AWS infrastructure is no longer active.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -73,6 +75,7 @@ At the Cloud domain a set of Lambda functions is used to calculate distance from
 * [![React][React.js]][React-url]
 * [![MUI][MUI]][MUI-url]
 * [![Vite][Vite]][Vite-url]
+* [![MSW][MSW]][MSW-url]
 * [![JEST][JEST]][JEST-url]
 
 
@@ -141,10 +144,11 @@ Follow the steps below to get the project up and running:
 - [x] Linting/formatting
   - [x] Add formatting configuration
   - [x] Add pre-commit linting and formatting
-- Sensor Data
-  - [ ] Create mock sensor dataset to be used for the purpose of the live demo
+- [x] Sensor Data
+  - [x] Create mock/randomized sensor data to be used for the purpose of the live demo
+  - [x] Create mock API to fetch sensor data
 - [ ] App sections
-  - Latest sensor readings view
+  - [ ] Latest sensor readings view
     - [ ] Add latest sensor readings page
     - [ ] Add latest sensor readings unit test
   - [ ] Map view
@@ -211,6 +215,10 @@ Project Link: [https://github.com/dimikmps/rESPonder-v2](https://github.com/dimi
 
 [MUI]: https://img.shields.io/badge/-mui-js?style=for-the-badge&logo=mui&logoColor=white&color=%23007FFF
 [MUI-url]: https://mui.com/
+
+[MSW]: https://img.shields.io/badge/-msw-js?style=for-the-badge&logo=mockserviceworker&logoColor=white&color=%23FF6A33
+[MSW-url]: https://mswjs.io/
+
 
 [JEST]: https://img.shields.io/badge/-jest-js?style=for-the-badge&logo=jest&logoColor=white&color=%23C21325
 [JEST-url]: https://jestjs.io/
