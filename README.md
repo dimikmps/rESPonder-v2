@@ -148,7 +148,7 @@ Follow the steps below to get the project up and running:
   - [x] Create mock/randomized sensor data to be used for the purpose of the live demo
   - [x] Create mock API to fetch sensor data
 - [ ] App sections
-  - Latest sensor readings view
+  - [ ] Latest sensor readings view
     - [ ] Add latest sensor readings page
     - [ ] Add latest sensor readings unit test
   - [ ] Map view
