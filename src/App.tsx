@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import FooterComponent from './components/FooterComponent/FooterComponent';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
+import DeviceStatusComponent from './components/DeviceStatusComponent/DeviceStatusComponent';
 import './App.css';
 
 function App() {
@@ -42,6 +43,8 @@ function App() {
         <Typography display="flex" justifyContent="center" fontSize="20px">
           An IoT application for disaster rescue scenarios
         </Typography>
+        {/* TODO: Replace/remove this with a proper loading modal and view/component*/}
+        <DeviceStatusComponent />
       </Box>
       <FooterComponent />
     </Box>
