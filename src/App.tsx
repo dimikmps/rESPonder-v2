@@ -45,7 +45,6 @@ function App() {
             An IoT application for disaster rescue scenarios
           </Typography>
         </Box>
-
         <DeviceStatusComponent />
       </Box>
     </Box>
