@@ -1,52 +1,53 @@
 import { Box, Typography } from '@mui/material';
-import FooterComponent from './components/FooterComponent/FooterComponent';
-import HeaderComponent from './components/HeaderComponent/HeaderComponent';
+import AppBarComponent from './components/AppBarComponent/AppBarComponent';
 import DeviceStatusComponent from './components/DeviceStatusComponent/DeviceStatusComponent';
+import SidebarComponent from './components/SidebarComponent/SidebarComponent';
+
 import './App.css';
+import { useState } from 'react';
+
+// TODO: Externalise these
+const appBarHeight = 64;
 
 function App() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setDrawerOpen((prevState) => !prevState);
+  };
+
   return (
     <Box
       display="flex"
-      flexDirection="column"
-      justifyContent="space-between"
-      height="100vh"
+      mt={appBarHeight + 'px'}
+      // TODO: Replace this once the footer has been integrated
+      mb={appBarHeight + 'px'}
+      width={'100vw'}
     >
-      <HeaderComponent />
+      {/* <CssBaseline /> */}
+      <AppBarComponent
+        appBarHeight={appBarHeight}
+        open={drawerOpen}
+        onToggle={handleDrawerToggle}
+      />
+      <SidebarComponent open={drawerOpen} onToggle={handleDrawerToggle} />
 
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        gap="66px"
-        height="100%"
-      >
-        <Box display="flex" justifyContent="center">
-          <Typography
-            variant="h2"
-            display="flex"
-            flexDirection="column"
-            justifyContent="flex-end"
-          >
-            rESPonder
-          </Typography>
-          <Typography
-            display="flex"
-            flexDirection="column"
-            justifyContent="flex-end"
-            height="100%"
-            fontSize="10px"
-          >
-            v.2
+      {/* TODO: Create a main component  */}
+      <Box component="main" sx={{ flexGrow: 1 }}>
+        <Box display="flex" flexDirection="column" justifyContent="center">
+          <Box display="flex" justifyContent="center">
+            <Typography variant="h2">rESPonder</Typography>
+            <Typography alignSelf="end" fontSize="10px">
+              v.2
+            </Typography>
+          </Box>
+          <Typography align="center" fontSize="20px" pt={2} pb={2}>
+            An IoT application for disaster rescue scenarios
           </Typography>
         </Box>
-        <Typography display="flex" justifyContent="center" fontSize="20px">
-          An IoT application for disaster rescue scenarios
-        </Typography>
-        {/* TODO: Replace/remove this with a proper loading modal and view/component*/}
+
         <DeviceStatusComponent />
       </Box>
-      <FooterComponent />
     </Box>
   );
 }

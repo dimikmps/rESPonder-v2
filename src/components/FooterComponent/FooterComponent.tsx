@@ -12,8 +12,8 @@ const FooterComponent = () => {
       width="100%"
       margin="0 auto"
     >
-      <Typography fontSize="10px" textAlign="right" color="white">
-        Copyright{' '}
+      <Typography fontSize="10px" textAlign="right" color="black">
+        Created by{' '}
         <Link
           color="inherit"
           underline="none"

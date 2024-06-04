@@ -4,10 +4,13 @@ import { SensorData } from '../interfaces/SensorData.interface';
  * Generates random (but sensible) sensor-derived data, to be returned by the MSW
  **/
 const generateRandomNumberInRange = (min: number, max: number) => {
-  console.log('INPUT', min, max, Math.random());
+  //TODO: Delete me
+  // console.log('INPUT', min, max, Math.random());
+
   const result = String(Math.floor(Math.random() * (max - min + 1)) + min);
 
-  console.log(result);
+  //TODO: Delete me
+  // console.log(result);
 
   return result;
 };
