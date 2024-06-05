@@ -148,15 +148,16 @@ Follow the steps below to get the project up and running:
   - [x] Create mock/randomized sensor data to be used for the purpose of the live demo
   - [x] Create mock API to fetch sensor data
 - [ ] App sections
+  - [ ] Homepage view
   - [ ] Latest sensor readings view
-    - [ ] Add latest sensor readings page
-    - [ ] Add latest sensor readings unit test
   - [ ] Map view
-    - [ ] Add map view page
-    - [ ] Add map view unit test
   - [ ] Indoor positioning
-    - [ ] Add indoor positioning test
-    - [ ] Indoor positioning unit test
+- [ ] Unit testing
+  - [ ] Homepage test
+  - [ ] Latest sensor readings test
+  - [ ] Map test
+  - [ ] Indoor test
+
 - [ ] Demo Deployment
 
 See the [open issues](https://github.com/dimikmps/rESPonder-v2/issues) for a full list of proposed features (and known issues).
