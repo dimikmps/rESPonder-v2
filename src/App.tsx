@@ -36,10 +36,10 @@ function App() {
         onToggle={handleDrawerToggle}
       />
       <SidebarComponent open={drawerOpen} onToggle={handleDrawerToggle} />
-      
+
       {/* TODO: Refactor this this to accommodate for child components */}
       <MainContentContainer />
-      
+
       <FooterComponent />
     </Box>
   );

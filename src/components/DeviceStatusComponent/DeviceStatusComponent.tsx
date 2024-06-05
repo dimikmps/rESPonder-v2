@@ -22,18 +22,18 @@ const DeviceStatusComponent = () => {
 
   return (
     <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      width="100%"
-      margin="0 auto"
+      display='flex'
+      flexDirection='column'
+      justifyContent='center'
+      width='100%'
+      margin='0 auto'
     >
       <Typography
-        display="flex"
-        justifyContent="center"
-        variant="subtitle1"
+        display='flex'
+        justifyContent='center'
+        variant='subtitle1'
         fontSize={10}
-        fontStyle="italic"
+        fontStyle='italic'
       >
         {!mockData
           ? // TODO: Replace this with a spinner of some sorts
