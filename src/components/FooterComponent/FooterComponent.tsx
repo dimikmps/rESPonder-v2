@@ -9,7 +9,6 @@ const FooterComponent = () => {
       // TODO: Externalise this.
       // height={'63px'}
       sx={{
-        // borderTop: '1px solid black',
         marginTop: 'auto',
       }}
       component='footer'

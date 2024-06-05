@@ -1,10 +1,14 @@
-import { Box, Typography } from '@mui/material';
-import DeviceStatusComponent from '../DeviceStatusComponent/DeviceStatusComponent';
+import React, { ReactElement } from 'react';
+import { Box } from '@mui/material';
+
+interface MainContentProps {
+  children: ReactElement[];
+}
 
 /*
  * Main Content Component
  **/
-const MainContentContainer = () => {
+const MainContentContainer = ({ children }: MainContentProps) => {
   return (
     <Box
       component='main'
@@ -15,16 +19,9 @@ const MainContentContainer = () => {
       width='100%'
       overflow='auto'
     >
-      <Box display='flex' justifyContent='center' width={'100%'}>
-        <Typography variant='h2'>rESPonder</Typography>
-        <Typography alignSelf='end' fontSize='10px'>
-          v.2
-        </Typography>
-      </Box>
-      <Typography align='center' fontSize='20px' pt={2} pb={2} width={'100%'}>
-        An IoT application for disaster rescue scenarios
-      </Typography>
-      <DeviceStatusComponent />
+      {children.map((child, index) => {
+        return <React.Fragment key={index}>{child}</React.Fragment>;
+      })}
     </Box>
   );
 };

@@ -24,20 +24,16 @@ const DeviceStatusComponent = () => {
     <Box
       display='flex'
       flexDirection='column'
-      justifyContent='center'
+      justifyContent='space-around'
+      textAlign={'center'}
       width='100%'
       margin='0 auto'
     >
-      <Typography
-        display='flex'
-        justifyContent='center'
-        variant='subtitle1'
-        fontSize={10}
-        fontStyle='italic'
-      >
+      <Typography>A showcase of future functionality :</Typography>
+      <Typography variant='subtitle1' fontSize={10} fontStyle='italic'>
         {!mockData
           ? // TODO: Replace this with a spinner of some sorts
-            'Sensor data not loaded...'
+            'Sensor data loading...'
           : `${mockData.ts} - Device: ${mockData.id} - Known: ${mockData.kn.length} - Unknown: ${mockData.unk} - RSSI1: ${mockData.kn[0].rssi} - RSSI2: ${mockData.kn[1].rssi}`}
       </Typography>
     </Box>
