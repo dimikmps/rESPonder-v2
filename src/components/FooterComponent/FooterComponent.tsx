@@ -6,18 +6,26 @@ import { Box, Link, Typography } from '@mui/material';
 const FooterComponent = () => {
   return (
     <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      width="100%"
-      margin="0 auto"
+      // TODO: Externalise this.
+      // height={'63px'}
+      sx={{
+        // borderTop: '1px solid black',
+        marginTop: 'auto',
+      }}
+      component='footer'
     >
-      <Typography fontSize="10px" textAlign="right" color="black">
+      <Typography
+        fontSize='10px'
+        textAlign='right'
+        color='black'
+        height={'100%'}
+        alignContent={'end'}
+      >
         Created by{' '}
         <Link
-          color="inherit"
-          underline="none"
-          href="https://www.linkedin.com/in/dkampas/"
+          color='inherit'
+          underline='none'
+          href='https://www.linkedin.com/in/dkampas/'
         >
           Dimitris Kampas
         </Link>

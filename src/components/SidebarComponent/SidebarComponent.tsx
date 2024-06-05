@@ -87,7 +87,7 @@ export default function SidebarComponent({
   const theme = useTheme();
 
   return (
-    <Drawer variant="permanent" open={open}>
+    <Drawer variant='permanent' open={open}>
       <DrawerHeader>
         <IconButton onClick={onToggle}>
           {theme.direction === 'rtl' ? (

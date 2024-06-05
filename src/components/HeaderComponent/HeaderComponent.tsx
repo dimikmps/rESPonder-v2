@@ -15,7 +15,7 @@ interface mainAppBarProps extends AppBarProps {
   onToggle: () => void;
 }
 
-const AppBar = styled(MuiAppBar, {
+const Header = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -36,19 +36,19 @@ const AppBar = styled(MuiAppBar, {
 /*
  * Main Header Component
  **/
-export default function AppBarComponent({
+export default function HeaderComponent({
   appBarHeight,
   open,
   onToggle,
 }: mainAppBarProps): JSX.Element {
   return (
-    <AppBar position="fixed" open={open} sx={{ height: appBarHeight + 'px' }}>
+    <Header position='fixed' open={open} sx={{ height: appBarHeight + 'px' }}>
       <Toolbar>
         <IconButton
-          color="inherit"
-          aria-label="open drawer"
+          color='inherit'
+          aria-label='open drawer'
           onClick={onToggle}
-          edge="start"
+          edge='start'
           sx={{
             marginRight: 5,
             ...(open && { display: 'none' }),
@@ -57,6 +57,6 @@ export default function AppBarComponent({
           <MenuIcon />
         </IconButton>
       </Toolbar>
-    </AppBar>
+    </Header>
   );
 }

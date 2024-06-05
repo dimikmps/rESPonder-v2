@@ -1,10 +1,10 @@
-import { Box, Typography } from '@mui/material';
-import AppBarComponent from './components/AppBarComponent/AppBarComponent';
-import DeviceStatusComponent from './components/DeviceStatusComponent/DeviceStatusComponent';
-import SidebarComponent from './components/SidebarComponent/SidebarComponent';
-
-import './App.css';
 import { useState } from 'react';
+import { Box, CssBaseline, useTheme } from '@mui/material';
+import SidebarComponent from './components/SidebarComponent/SidebarComponent';
+import HeaderComponent from './components/HeaderComponent/HeaderComponent';
+import FooterComponent from './components/FooterComponent/FooterComponent';
+import MainContentContainer from './components/MainContentContainer/MainContentContainer';
+import './App.css';
 
 // TODO: Externalise these
 const appBarHeight = 64;
@@ -12,41 +12,35 @@ const appBarHeight = 64;
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
+  const theme = useTheme();
+
   const handleDrawerToggle = () => {
     setDrawerOpen((prevState) => !prevState);
   };
 
   return (
     <Box
-      display="flex"
+      display='flex'
+      flexDirection='column'
       mt={appBarHeight + 'px'}
-      // TODO: Replace this once the footer has been integrated
-      mb={appBarHeight + 'px'}
-      width={'100vw'}
+      pl={theme.spacing(7)}
+      width='100vw'
+      height={`calc(100vh - ${appBarHeight}px)`}
+      overflow='hidden'
+      position='relative'
     >
-      {/* <CssBaseline /> */}
-      <AppBarComponent
+      <CssBaseline />
+      <HeaderComponent
         appBarHeight={appBarHeight}
         open={drawerOpen}
         onToggle={handleDrawerToggle}
       />
       <SidebarComponent open={drawerOpen} onToggle={handleDrawerToggle} />
-
-      {/* TODO: Create a main component  */}
-      <Box component="main" sx={{ flexGrow: 1 }}>
-        <Box display="flex" flexDirection="column" justifyContent="center">
-          <Box display="flex" justifyContent="center">
-            <Typography variant="h2">rESPonder</Typography>
-            <Typography alignSelf="end" fontSize="10px">
-              v.2
-            </Typography>
-          </Box>
-          <Typography align="center" fontSize="20px" pt={2} pb={2}>
-            An IoT application for disaster rescue scenarios
-          </Typography>
-        </Box>
-        <DeviceStatusComponent />
-      </Box>
+      
+      {/* TODO: Refactor this this to accommodate for child components */}
+      <MainContentContainer />
+      
+      <FooterComponent />
     </Box>
   );
 }
