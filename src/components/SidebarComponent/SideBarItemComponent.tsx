@@ -26,7 +26,7 @@ const LinkWithText = styled(Link)(() => ({
  * @param { string } url  - The url each menu item points to.
  * @returns {JSX.Element} - The SideBarItemComponent JSX element.
  */
-const SideBarItemComponent = ({ open, icon, text, url }: SidebarItemProps) => {
+const SideBarItemComponent = ({ open, icon, text, url }: SidebarItemProps): JSX.Element => {
   return (
     <LinkWithText to={url}>
       <ListItemButton
