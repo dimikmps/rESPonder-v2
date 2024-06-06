@@ -2,7 +2,6 @@ import { Box, Typography } from '@mui/material';
 
 /**
  * Homepage component
- * Returns content based on the url/routing
  * @returns {JSX.Element} - The HomePageComponent JSX element.
  */
 const HomePageComponent = (): JSX.Element => {
