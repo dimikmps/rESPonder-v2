@@ -1,9 +1,10 @@
 import { Box, Link, Typography } from '@mui/material';
 
-/*
- * Main Footer Component
- **/
-const FooterComponent = () => {
+/**
+ * Footer component
+ * @returns {JSX.Element} - The FooterComponent JSX element.
+ */
+const FooterComponent = (): JSX.Element => {
   return (
     <Box
       // TODO: Externalise this.

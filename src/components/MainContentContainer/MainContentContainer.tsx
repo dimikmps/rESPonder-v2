@@ -1,14 +1,18 @@
-import React, { ReactElement } from 'react';
 import { Box } from '@mui/material';
 
-interface MainContentProps {
-  children: ReactElement[];
+interface MainContentContainerProps {
+  routeComponent: React.JSX.Element;
 }
 
-/*
- * Main Content Component
- **/
-const MainContentContainer = ({ children }: MainContentProps) => {
+/**
+ * Main Content Container
+ * Returns content based on the url/routing
+ * @param {React.JSX.Element} routeComponent - The component/view to be returned.
+ * @returns {JSX.Element} - The MainContentContainer JSX element, wrapping component provided by the router.
+ */
+const MainContentContainer = ({
+  routeComponent,
+}: MainContentContainerProps): React.JSX.Element => {
   return (
     <Box
       component='main'
@@ -19,10 +23,9 @@ const MainContentContainer = ({ children }: MainContentProps) => {
       width='100%'
       overflow='auto'
     >
-      {children.map((child, index) => {
-        return <React.Fragment key={index}>{child}</React.Fragment>;
-      })}
+      {routeComponent}
     </Box>
   );
 };
+
 export default MainContentContainer;

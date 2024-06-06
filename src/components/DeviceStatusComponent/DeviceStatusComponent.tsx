@@ -2,10 +2,12 @@ import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { SensorData } from '../../interfaces/SensorData.interface';
 
-/*
- * Temporary component to fetch display sensor data every 5"
- **/
-const DeviceStatusComponent = () => {
+/**
+ * Device status component
+ * Displays sensor data fetch every 5"
+ * @returns {JSX.Element} - The DeviceStatusComponent JSX element.
+ */
+const DeviceStatusComponent = (): JSX.Element => {
   const [mockData, setMockData] = useState<SensorData | null>(null);
 
   useEffect(() => {
@@ -29,7 +31,9 @@ const DeviceStatusComponent = () => {
       width='100%'
       margin='0 auto'
     >
-      <Typography>A showcase of future functionality :</Typography>
+      {/* TODO: Move title on top. */}
+      {/* TODO: Make page prototype for all pages to follow */}
+      <Typography variant='h4'>Sensor data streaming</Typography>
       <Typography variant='subtitle1' fontSize={10} fontStyle='italic'>
         {!mockData
           ? // TODO: Replace this with a spinner of some sorts

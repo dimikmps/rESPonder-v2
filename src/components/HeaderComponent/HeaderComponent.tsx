@@ -33,9 +33,13 @@ const Header = styled(MuiAppBar, {
   }),
 }));
 
-/*
- * Main Header Component
- **/
+/**
+ * Header component
+ * @param {number} appBarHeight - The desired app bar's height.
+ * @param {boolean} open  - A flag representing whether or not the sidebar is open.
+ * @param {() => void)} onToggle  - A callback triggered when the sidebar is opened/closed.
+ * @returns {JSX.Element} - The HeaderComponent JSX element.
+ */
 export default function HeaderComponent({
   appBarHeight,
   open,

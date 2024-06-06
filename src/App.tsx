@@ -4,9 +4,11 @@ import SidebarComponent from './components/SidebarComponent/SidebarComponent';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import FooterComponent from './components/FooterComponent/FooterComponent';
 import MainContentContainer from './components/MainContentContainer/MainContentContainer';
-import './App.css';
 import DeviceStatusComponent from './components/DeviceStatusComponent/DeviceStatusComponent';
 import HomePageComponent from './components/HomePageComponent/HomePageComponent';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import UnderConstructionComponent from './components/UnderConstructionComponent/UnderConstructionComponent';
+import './App.css';
 
 // TODO: Externalise these
 const appBarHeight = 64;
@@ -31,18 +33,44 @@ function App() {
       position='relative'
     >
       <CssBaseline />
-      <HeaderComponent
-        appBarHeight={appBarHeight}
-        open={drawerOpen}
-        onToggle={handleDrawerToggle}
-      />
-      <SidebarComponent open={drawerOpen} onToggle={handleDrawerToggle} />
 
-      <MainContentContainer>
-        {/* TODO: Add Router */}
-        <HomePageComponent />
-        <DeviceStatusComponent />
-      </MainContentContainer>
+      <BrowserRouter>
+        <HeaderComponent
+          appBarHeight={appBarHeight}
+          open={drawerOpen}
+          onToggle={handleDrawerToggle}
+        />
+
+        <SidebarComponent open={drawerOpen} onToggle={handleDrawerToggle} />
+
+        <MainContentContainer
+          routeComponent={
+            <Routes>
+              <Route path='/' element={<HomePageComponent />} />
+              <Route
+                path='/map'
+                element={<UnderConstructionComponent page='Map View' />}
+              />
+              <Route path='/status' element={<DeviceStatusComponent />} />
+              <Route
+                path='/proximity'
+                element={
+                  <UnderConstructionComponent page='Device proximity view' />
+                }
+              />
+              <Route
+                path='/contact'
+                element={<UnderConstructionComponent page='Support' />}
+              />
+              <Route
+                path='/about'
+                element={<UnderConstructionComponent page='About' />}
+              />
+            </Routes>
+          }
+        />
+        
+      </BrowserRouter>
 
       <FooterComponent />
     </Box>

@@ -1,9 +1,11 @@
 import { Box, Typography } from '@mui/material';
 
-/*
- * Home page content component
- **/
-const HomePageComponent = () => {
+/**
+ * Homepage component
+ * Returns content based on the url/routing
+ * @returns {JSX.Element} - The HomePageComponent JSX element.
+ */
+const HomePageComponent = (): JSX.Element => {
   return (
     <>
       <Box display='flex' justifyContent='center' width='100%'>
@@ -18,4 +20,5 @@ const HomePageComponent = () => {
     </>
   );
 };
+
 export default HomePageComponent;
