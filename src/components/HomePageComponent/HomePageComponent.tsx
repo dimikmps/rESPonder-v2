@@ -7,7 +7,7 @@ import { Box, Typography } from '@mui/material';
  */
 const HomePageComponent = (): JSX.Element => {
   return (
-    <>
+    <Box display='flex' flexDirection='column' justifyContent='space-around'>
       <Box display='flex' justifyContent='center' width='100%'>
         <Typography variant='h2'>rESPonder</Typography>
         <Typography alignSelf='end' fontSize='10px'>
@@ -17,7 +17,7 @@ const HomePageComponent = (): JSX.Element => {
       <Typography align='center' fontSize='20px' pt={2} pb={2} width={'100%'}>
         An IoT application for disaster rescue scenarios
       </Typography>
-    </>
+    </Box>
   );
 };
 

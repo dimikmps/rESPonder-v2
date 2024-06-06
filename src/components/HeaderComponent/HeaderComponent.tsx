@@ -1,7 +1,8 @@
-import { Toolbar, styled } from '@mui/material';
+import { Toolbar, Typography, styled } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from 'react-router-dom';
 
 // TODO: Export this globally
 const drawerWidth = 270;
@@ -60,6 +61,17 @@ export default function HeaderComponent({
         >
           <MenuIcon />
         </IconButton>
+        <Typography
+          variant='h6'
+          noWrap
+          component='div'
+          textAlign='center'
+          sx={{ width: '100%' }}
+        >
+          <Link to='/' style={{ color: 'inherit', textDecoration: 'none' }}>
+            rESPonder v.2
+          </Link>
+        </Typography>
       </Toolbar>
     </Header>
   );
