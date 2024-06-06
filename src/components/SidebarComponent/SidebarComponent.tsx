@@ -79,6 +79,11 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+const LinkWithText = styled(Link)(() => ({
+  color: 'inherit',
+  textDecoration: 'none',
+}));
+
 /**
  * Sidebar component
  * @param {boolean} open  - A flag representing whether or not the sidebar is open.
@@ -105,40 +110,72 @@ export default function SidebarComponent({
       <Divider />
       <List>
         {mainMenuItems.map((text, index) => (
+          // TODO: Make a reusable component here
           <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            {/* TODO: Move link object to include the whole button */}
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                {/* TODO: Add urls dynamically from menu item object */}
-                {index === 0 ? (
-                  <Link to='/map'>
+            {index === 0 ? (
+              <LinkWithText to='/map'>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
                     <MapIcon />
-                  </Link>
-                ) : index === 1 ? (
-                  <Link to='/status'>
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </LinkWithText>
+            ) : index === 1 ? (
+              <LinkWithText to='/status'>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
                     <DeviceHubIcon />
-                  </Link>
-                ) : (
-                  <Link to='/proximity'>
-                    {' '}
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </LinkWithText>
+            ) : (
+              <LinkWithText to='/proximity'>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
                     <ConnectWithoutContactIcon />
-                  </Link>
-                )}
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </LinkWithText>
+            )}
           </ListItem>
         ))}
       </List>
@@ -146,33 +183,49 @@ export default function SidebarComponent({
       <List>
         {secondaryMenuItems.map((text, index) => (
           <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                {/* TODO: Add urls dynamically from menu item object */}
-                {index === 0 ? (
-                  <Link to='/contact'>
+            {index === 0 ? (
+              <LinkWithText to='/contact'>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
                     <SupportAgentIcon />
-                  </Link>
-                ) : (
-                  <Link to='/about'>
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </LinkWithText>
+            ) : (
+              <LinkWithText to='/about'>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
                     <InfoIcon />
-                  </Link>
-                )}
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </LinkWithText>
+            )}
           </ListItem>
         ))}
       </List>
