@@ -73,9 +73,10 @@ The current (v2) implementation is an updated version of the original front-end 
 ### Built With
 
 * [![React][React.js]][React-url]
-* [![MUI][MUI]][MUI-url]
 * [![Vite][Vite]][Vite-url]
-* [![MSW][MSW]][MSW-url]
+* [![MUI][MUI]][MUI-url]
+* [![REACTROUTER][REACTROUTER]][REACTROUTER-url]
+* [![MSWWorker][MSW]][MSW-url]
 * [![JEST][JEST]][JEST-url]
 
 
@@ -138,9 +139,10 @@ Follow the steps below to get the project up and running:
 ## Roadmap
 
 - [x] App layout
-  - [x] Add main content component 
+  - [x] Add Main content component 
   - [x] Add Header component
   - [x] Add Footer component
+  - [x] Add Routing
 - [x] Linting/formatting
   - [x] Add formatting configuration
   - [x] Add pre-commit linting and formatting
@@ -151,7 +153,9 @@ Follow the steps below to get the project up and running:
   - [ ] Homepage view
   - [ ] Latest sensor readings view
   - [ ] Map view
-  - [ ] Indoor positioning
+  - [ ] Indoor positioning view
+  - [ ] Contact view
+  - [ ] About view
 - [ ] Unit testing
   - [ ] Homepage test
   - [ ] Latest sensor readings test
@@ -220,6 +224,8 @@ Project Link: [https://github.com/dimikmps/rESPonder-v2](https://github.com/dimi
 [MSW]: https://img.shields.io/badge/-msw-js?style=for-the-badge&logo=mockserviceworker&logoColor=white&color=%23FF6A33
 [MSW-url]: https://mswjs.io/
 
-
 [JEST]: https://img.shields.io/badge/-jest-js?style=for-the-badge&logo=jest&logoColor=white&color=%23C21325
 [JEST-url]: https://jestjs.io/
+
+[REACTROUTER]: https://img.shields.io/badge/-reactrouter-js?style=for-the-badge&logo=reactrouter&logoColor=white&color=%23CA4245
+[REACTROUTER-url]: https://reactrouter.com
