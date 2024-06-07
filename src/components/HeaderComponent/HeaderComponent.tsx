@@ -40,13 +40,9 @@ const Header = styled(MuiAppBar, {
  * @param {() => void} onToggle  - A callback triggered when the sidebar is opened/closed.
  * @returns {JSX.Element} - The HeaderComponent JSX element.
  */
-export default function HeaderComponent({
-  open,
-  onToggle,
-}: MainAppBarProps): JSX.Element {
+const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
   const theme = useTheme();
 
-  console.log('edw', theme.spacing(1));
   return (
     <Header position='fixed' open={open}>
       <Toolbar sx={{ height: theme.custom.appBarHeight }}>
@@ -60,6 +56,7 @@ export default function HeaderComponent({
             // Fixes the issue with the hamburger button not aligning properly with the rest of the sidebar icons
             // TODO: Find a better solution
             marginLeft: { xs: '-4px', sm: '-12px' },
+            marginRight: { xs: '-4px', sm: '-12px' },
           }}
         >
           <MenuIcon />
@@ -78,4 +75,6 @@ export default function HeaderComponent({
       </Toolbar>
     </Header>
   );
-}
+};
+
+export default HeaderComponent;

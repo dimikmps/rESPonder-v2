@@ -1,19 +1,17 @@
 import { useState } from 'react';
-import { Box, CssBaseline } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
+import AppContainerComponent from './components/AppContainerComponent/AppContainerComponent';
 import SidebarComponent from './components/SidebarComponent/SidebarComponent';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import FooterComponent from './components/FooterComponent/FooterComponent';
-import MainContentContainer from './components/MainContentContainer/MainContentContainer';
-import DeviceStatusComponent from './components/DeviceStatusComponent/DeviceStatusComponent';
+import MainContentContainer from './components/MainContentContainerComponent/MainContentContainerComponent';
+import DeviceStatusPage from './pages/DeviceStatusPage/DeviceStatusPage';
 import HomePage from './pages/HomePage/HomePage';
 import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructionPage';
 import './App.css';
 
 function App() {
-  const theme = useTheme();
-
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -21,16 +19,7 @@ function App() {
   };
 
   return (
-    <Box
-      display='flex'
-      flexDirection='column'
-      mt={theme.custom.appBarHeight}
-      ml={theme.custom.sidebarClosedWidth}
-      height={`calc(100vh - ${theme.custom.appBarHeight})`}
-      width={`calc(100vw -  ${theme.custom.sidebarClosedWidth})`}
-      overflow='hidden'
-      position='relative'
-    >
+    <AppContainerComponent>
       <CssBaseline />
 
       <BrowserRouter>
@@ -46,7 +35,7 @@ function App() {
                 path='/map'
                 element={<UnderConstructionPage page='Map View' />}
               />
-              <Route path='/status' element={<DeviceStatusComponent />} />
+              <Route path='/status' element={<DeviceStatusPage />} />
               <Route
                 path='/proximity'
                 element={<UnderConstructionPage page='Device proximity view' />}
@@ -65,7 +54,7 @@ function App() {
       </BrowserRouter>
 
       <FooterComponent />
-    </Box>
+    </AppContainerComponent>
   );
 }
 

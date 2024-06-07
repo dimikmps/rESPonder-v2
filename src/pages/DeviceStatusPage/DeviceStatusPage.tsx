@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { SensorData } from '../../interfaces/SensorData.interface';
 
 /**
- * Device status component
+ * Device status page
  * Displays sensor data fetch every 5"
- * @returns {JSX.Element} - The DeviceStatusComponent JSX element.
+ * @returns {JSX.Element} - The DeviceStatusPage JSX element.
  */
-const DeviceStatusComponent = (): JSX.Element => {
+const DeviceStatusPage = (): JSX.Element => {
   const [mockData, setMockData] = useState<SensorData | null>(null);
 
   useEffect(() => {
@@ -44,4 +44,4 @@ const DeviceStatusComponent = (): JSX.Element => {
   );
 };
 
-export default DeviceStatusComponent;
+export default DeviceStatusPage;

@@ -7,8 +7,6 @@ import { Box, Link, Typography } from '@mui/material';
 const FooterComponent = (): JSX.Element => {
   return (
     <Box
-      // TODO: Externalise this.
-      // height={'63px'}
       sx={{
         marginTop: 'auto',
       }}
@@ -33,4 +31,5 @@ const FooterComponent = (): JSX.Element => {
     </Box>
   );
 };
+
 export default FooterComponent;

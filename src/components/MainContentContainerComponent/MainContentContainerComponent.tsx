@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-interface MainContentContainerProps {
+interface MainContentContainerComponentProps {
   routeComponent: React.JSX.Element;
 }
 
@@ -8,11 +8,11 @@ interface MainContentContainerProps {
  * Main Content Container
  * Returns content based on the url/routing
  * @param {React.JSX.Element} routeComponent - The component/view to be returned.
- * @returns {JSX.Element} - The MainContentContainer JSX element, wrapping component provided by the router.
+ * @returns {JSX.Element} - The MainContentContainerComponent JSX element, wrapping component provided by the router.
  */
-const MainContentContainer = ({
+const MainContentContainerComponent = ({
   routeComponent,
-}: MainContentContainerProps): React.JSX.Element => {
+}: MainContentContainerComponentProps): React.JSX.Element => {
   return (
     <Box
       component='main'
@@ -28,4 +28,4 @@ const MainContentContainer = ({
   );
 };
 
-export default MainContentContainer;
+export default MainContentContainerComponent;

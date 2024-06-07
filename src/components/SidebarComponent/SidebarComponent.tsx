@@ -81,10 +81,10 @@ const Drawer = styled(MuiDrawer, {
  * @param {() => void)} onToggle  - A callback triggered when the sidebar is opened/closed.
  * @returns {JSX.Element} - The SideBarComponent JSX element.
  */
-export default function SidebarComponent({
+const SidebarComponent = ({
   open,
   onToggle,
-}: MainSidebarComponentProps): JSX.Element {
+}: MainSidebarComponentProps): JSX.Element => {
   const theme = useTheme();
 
   return (
@@ -151,4 +151,6 @@ export default function SidebarComponent({
       </List>
     </Drawer>
   );
-}
+};
+
+export default SidebarComponent;
