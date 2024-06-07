@@ -56,7 +56,7 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
             // Fixes the issue with the hamburger button not aligning properly with the rest of the sidebar icons
             // TODO: Find a better solution
             marginLeft: { xs: '-4px', sm: '-12px' },
-            marginRight: { xs: '-4px', sm: '-12px' },
+            // marginRight: { xs: '-4px', sm: '-12px' },
           }}
         >
           <MenuIcon />

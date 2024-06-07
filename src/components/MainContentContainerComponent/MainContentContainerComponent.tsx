@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 
 interface MainContentContainerComponentProps {
   routeComponent: React.JSX.Element;
@@ -13,6 +13,8 @@ interface MainContentContainerComponentProps {
 const MainContentContainerComponent = ({
   routeComponent,
 }: MainContentContainerComponentProps): React.JSX.Element => {
+  const theme = useTheme();
+
   return (
     <Box
       component='main'
@@ -22,6 +24,9 @@ const MainContentContainerComponent = ({
       height='100%'
       width='100%'
       overflow='auto'
+      // Use/override this to force padding on the right of the main content area (i.e. each routable page)
+      // Aligns each page's content to the center, as per the sidebar that is rendered on the left
+      pr={theme.custom.appBarHeight}
     >
       {routeComponent}
     </Box>
