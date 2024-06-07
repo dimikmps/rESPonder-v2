@@ -7,12 +7,11 @@ import { Link } from 'react-router-dom';
 interface MainAppBarProps {
   open: boolean;
   appBarHeight: number;
-  sidebarClosedWidth: number;
   sidebarOpenWidth: number;
   onToggle: () => void;
 }
 
-type PropsToOmit = 'onToggle' | 'sidebarClosedWidth' | 'appBarHeight';
+type PropsToOmit = 'onToggle' | 'appBarHeight';
 
 interface HeaderProps
   extends MuiAppBarProps,
@@ -39,16 +38,17 @@ const Header = styled(MuiAppBar, {
 
 /**
  * Header component
- * @param {number} appBarHeight - The desired app bar's height.
  * @param {boolean} open  - A flag representing whether or not the sidebar is open.
+ * @param {number} appBarHeight - The desired app bar's height.
+ * @param {number} sidebarOpenWidth - The sidebar's given width when expanded.
  * @param {() => void} onToggle  - A callback triggered when the sidebar is opened/closed.
  * @returns {JSX.Element} - The HeaderComponent JSX element.
  */
 export default function HeaderComponent({
-  appBarHeight,
   open,
-  onToggle,
+  appBarHeight,
   sidebarOpenWidth,
+  onToggle,
 }: MainAppBarProps): JSX.Element {
   const theme = useTheme();
 

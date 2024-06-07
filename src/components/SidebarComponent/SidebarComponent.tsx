@@ -94,6 +94,9 @@ const Drawer = styled(MuiDrawer, {
 /**
  * Sidebar component
  * @param {boolean} open  - A flag representing whether or not the sidebar is open.
+ * @param appBarHeight - The desired app bar's height.
+ * @param sidebarOpenWidth - The sidebar's given width when expanded.
+ * @param idebarClosedWidth - The sidebar's given width when collapsed.
  * @param {() => void)} onToggle  - A callback triggered when the sidebar is opened/closed.
  * @returns {JSX.Element} - The SideBarComponent JSX element.
  */

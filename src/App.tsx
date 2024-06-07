@@ -40,7 +40,6 @@ function App() {
           open={drawerOpen}
           onToggle={handleDrawerToggle}
           appBarHeight={appBarHeight}
-          sidebarClosedWidth={sidebarClosedWidth}
           sidebarOpenWidth={sidebarOpenWidth}
         />
 
