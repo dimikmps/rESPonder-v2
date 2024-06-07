@@ -10,7 +10,7 @@ interface UnderConstructionComponentProps {
  * @param {string} page - The page which the under-construction status refers to.
  * @returns {JSX.Element} - The UnderConstructionComponent JSX element.
  */
-const UnderConstructionComponent = ({
+const UnderConstructionPage = ({
   page,
 }: UnderConstructionComponentProps): JSX.Element => {
   return (
@@ -30,4 +30,4 @@ const UnderConstructionComponent = ({
   );
 };
 
-export default UnderConstructionComponent;
+export default UnderConstructionPage;

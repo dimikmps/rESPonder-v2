@@ -1,21 +1,19 @@
 import { useState } from 'react';
 import { Box, CssBaseline } from '@mui/material';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 import SidebarComponent from './components/SidebarComponent/SidebarComponent';
 import HeaderComponent from './components/HeaderComponent/HeaderComponent';
 import FooterComponent from './components/FooterComponent/FooterComponent';
 import MainContentContainer from './components/MainContentContainer/MainContentContainer';
 import DeviceStatusComponent from './components/DeviceStatusComponent/DeviceStatusComponent';
-import HomePageComponent from './components/HomePageComponent/HomePageComponent';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import UnderConstructionComponent from './components/UnderConstructionComponent/UnderConstructionComponent';
+import HomePage from './pages/HomePage/HomePage';
+import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructionPage';
 import './App.css';
 
-// TODO: Move these specs into a theme configuration so as not to have them passed as props
-const appBarHeight = 64;
-const sidebarClosedWidth = 66;
-const sidebarOpenWidth = 272;
-
 function App() {
+  const theme = useTheme();
+
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -26,53 +24,40 @@ function App() {
     <Box
       display='flex'
       flexDirection='column'
-      mt={appBarHeight + 'px'}
-      ml={sidebarClosedWidth + 'px'}
-      height={`calc(100vh - ${appBarHeight}px)`}
-      width={`calc(100vw -  ${sidebarClosedWidth}px)`}
+      mt={theme.custom.appBarHeight}
+      ml={theme.custom.sidebarClosedWidth}
+      height={`calc(100vh - ${theme.custom.appBarHeight})`}
+      width={`calc(100vw -  ${theme.custom.sidebarClosedWidth})`}
       overflow='hidden'
       position='relative'
     >
       <CssBaseline />
 
       <BrowserRouter>
-        <HeaderComponent
-          open={drawerOpen}
-          onToggle={handleDrawerToggle}
-          appBarHeight={appBarHeight}
-          sidebarOpenWidth={sidebarOpenWidth}
-        />
+        <HeaderComponent open={drawerOpen} onToggle={handleDrawerToggle} />
 
-        <SidebarComponent
-          open={drawerOpen}
-          onToggle={handleDrawerToggle}
-          appBarHeight={appBarHeight}
-          sidebarClosedWidth={sidebarClosedWidth}
-          sidebarOpenWidth={sidebarOpenWidth}
-        />
+        <SidebarComponent open={drawerOpen} onToggle={handleDrawerToggle} />
 
         <MainContentContainer
           routeComponent={
             <Routes>
-              <Route path='/' element={<HomePageComponent />} />
+              <Route path='/' element={<HomePage />} />
               <Route
                 path='/map'
-                element={<UnderConstructionComponent page='Map View' />}
+                element={<UnderConstructionPage page='Map View' />}
               />
               <Route path='/status' element={<DeviceStatusComponent />} />
               <Route
                 path='/proximity'
-                element={
-                  <UnderConstructionComponent page='Device proximity view' />
-                }
+                element={<UnderConstructionPage page='Device proximity view' />}
               />
               <Route
                 path='/contact'
-                element={<UnderConstructionComponent page='Support' />}
+                element={<UnderConstructionPage page='Support' />}
               />
               <Route
                 path='/about'
-                element={<UnderConstructionComponent page='About' />}
+                element={<UnderConstructionPage page='About' />}
               />
             </Routes>
           }

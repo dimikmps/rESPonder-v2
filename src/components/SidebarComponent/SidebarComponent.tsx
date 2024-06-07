@@ -1,5 +1,5 @@
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
-import MuiDrawer, { DrawerProps } from '@mui/material/Drawer';
+import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -24,21 +24,13 @@ const mainMenuItems: string[] = [
 // List of secondary menu items to be presented in the sidebar
 const secondaryMenuItems: string[] = ['Support', 'About'];
 
-interface SidebarComponentProps {
+interface MainSidebarComponentProps {
   open: boolean;
   onToggle: () => void;
-  appBarHeight: number;
-  sidebarOpenWidth: number;
-  sidebarClosedWidth: number;
 }
 
-interface DrawerPropsExtended extends DrawerProps {
-  sidebarOpenWidth: number;
-  sidebarClosedWidth: number;
-}
-
-const openedMixin = (theme: Theme, sidebarOpenWidth: number): CSSObject => ({
-  width: sidebarOpenWidth + 'px',
+const openedMixin = (theme: Theme): CSSObject => ({
+  width: theme.custom.sidebarOpenWidth,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -46,13 +38,13 @@ const openedMixin = (theme: Theme, sidebarOpenWidth: number): CSSObject => ({
   overflowX: 'hidden',
 });
 
-const closedMixin = (theme: Theme, sidebarClosedWidth: number): CSSObject => ({
+const closedMixin = (theme: Theme): CSSObject => ({
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
-  width: `calc(${sidebarClosedWidth}px + 1px)`,
+  width: `calc(${theme.custom.sidebarClosedWidth} + 1px)`,
   // [theme.breakpoints.up('sm')]: {
   //   width: `calc(${sidebarClosedWidth}px + 9px)`,
   // },
@@ -68,55 +60,36 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) =>
-    prop !== 'open' &&
-    prop !== 'sidebarOpenWidth' &&
-    prop !== 'sidebarClosedWidth',
-})<DrawerPropsExtended>(
-  ({ theme, open, sidebarOpenWidth, sidebarClosedWidth }) => ({
-    // width: sidebarOpenWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-    boxSizing: 'border-box',
-    ...(open &&
-      sidebarOpenWidth && {
-        ...openedMixin(theme, sidebarOpenWidth),
-        '& .MuiDrawer-paper': openedMixin(theme, sidebarOpenWidth),
-      }),
-    ...(!open &&
-      sidebarClosedWidth && {
-        ...closedMixin(theme, sidebarClosedWidth),
-        '& .MuiDrawer-paper': closedMixin(theme, sidebarClosedWidth),
-      }),
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  flexShrink: 0,
+  whiteSpace: 'nowrap',
+  boxSizing: 'border-box',
+  ...(open && {
+    ...openedMixin(theme),
+    '& .MuiDrawer-paper': openedMixin(theme),
   }),
-);
+  ...(!open && {
+    ...closedMixin(theme),
+    '& .MuiDrawer-paper': closedMixin(theme),
+  }),
+}));
 
 /**
  * Sidebar component
  * @param {boolean} open  - A flag representing whether or not the sidebar is open.
- * @param appBarHeight - The desired app bar's height.
- * @param sidebarOpenWidth - The sidebar's given width when expanded.
- * @param idebarClosedWidth - The sidebar's given width when collapsed.
  * @param {() => void)} onToggle  - A callback triggered when the sidebar is opened/closed.
  * @returns {JSX.Element} - The SideBarComponent JSX element.
  */
 export default function SidebarComponent({
   open,
   onToggle,
-  appBarHeight,
-  sidebarOpenWidth,
-  sidebarClosedWidth,
-}: SidebarComponentProps): JSX.Element {
+}: MainSidebarComponentProps): JSX.Element {
   const theme = useTheme();
 
   return (
-    <Drawer
-      variant='permanent'
-      open={open}
-      sidebarOpenWidth={sidebarOpenWidth}
-      sidebarClosedWidth={sidebarClosedWidth}
-    >
-      <DrawerHeader sx={{ height: appBarHeight }}>
+    <Drawer variant='permanent' open={open}>
+      <DrawerHeader sx={{ height: theme.custom.appBarHeight }}>
         <IconButton onClick={onToggle}>
           {theme.direction === 'rtl' ? (
             <ChevronRightIcon />
