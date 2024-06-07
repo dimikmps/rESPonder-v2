@@ -1,60 +1,74 @@
-import { Toolbar, Typography, styled } from '@mui/material';
+import { Toolbar, Typography, styled, useTheme } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 
-// TODO: Export this globally
-const drawerWidth = 270;
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-interface mainAppBarProps extends AppBarProps {
-  appBarHeight?: number;
+interface MainAppBarProps {
+  open: boolean;
+  appBarHeight: number;
+  sidebarClosedWidth: number;
+  sidebarOpenWidth: number;
   onToggle: () => void;
 }
 
+type PropsToOmit = 'onToggle' | 'sidebarClosedWidth' | 'appBarHeight';
+
+interface HeaderProps
+  extends MuiAppBarProps,
+    Omit<MainAppBarProps, PropsToOmit> {}
+
 const Header = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
+  shouldForwardProp: (prop) => prop !== 'open' && prop !== 'sidebarOpenWidth',
+})<HeaderProps>(({ theme, open, sidebarOpenWidth }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
+  ...(open &&
+    sidebarOpenWidth && {
+      marginLeft: sidebarOpenWidth,
+      width: `calc(100% - ${sidebarOpenWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     }),
-  }),
 }));
 
 /**
  * Header component
  * @param {number} appBarHeight - The desired app bar's height.
  * @param {boolean} open  - A flag representing whether or not the sidebar is open.
- * @param {() => void)} onToggle  - A callback triggered when the sidebar is opened/closed.
+ * @param {() => void} onToggle  - A callback triggered when the sidebar is opened/closed.
  * @returns {JSX.Element} - The HeaderComponent JSX element.
  */
 export default function HeaderComponent({
   appBarHeight,
   open,
   onToggle,
-}: mainAppBarProps): JSX.Element {
+  sidebarOpenWidth,
+}: MainAppBarProps): JSX.Element {
+  const theme = useTheme();
+
   return (
-    <Header position='fixed' open={open} sx={{ height: appBarHeight + 'px' }}>
-      <Toolbar>
+    <Header
+      position='fixed'
+      open={open}
+      sidebarOpenWidth={sidebarOpenWidth}
+      sx={{ height: appBarHeight + 'px' }}
+    >
+      <Toolbar sx={{ height: appBarHeight + 'px' }}>
         <IconButton
           color='inherit'
           aria-label='open drawer'
           onClick={onToggle}
           edge='start'
           sx={{
+            // Fixes the issue with the hamburger button not aligning properly with the rest of the sidebar icons
+            paddingLeft: { xs: theme.spacing(1), m: 'inherit' },
+            paddingRight: { xs: theme.spacing(1), m: 'inherit' },
             marginRight: 5,
             ...(open && { display: 'none' }),
           }}

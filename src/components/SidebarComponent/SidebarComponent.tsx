@@ -1,5 +1,5 @@
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
-import MuiDrawer from '@mui/material/Drawer';
+import MuiDrawer, { DrawerProps } from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -14,24 +14,31 @@ import DeviceHubIcon from '@mui/icons-material/DeviceHub';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import SideBarItem from './SideBarItemComponent';
 
-// TODO: Export this globally
-const drawerWidth = 270;
-
+// List of primary menu items to be presented in the sidebar
 const mainMenuItems: string[] = [
   'Map View',
   'Latest Sensor Readings',
   'Proximity approximation',
 ];
 
+// List of secondary menu items to be presented in the sidebar
 const secondaryMenuItems: string[] = ['Support', 'About'];
 
 interface SidebarComponentProps {
   open: boolean;
   onToggle: () => void;
+  appBarHeight: number;
+  sidebarOpenWidth: number;
+  sidebarClosedWidth: number;
 }
 
-const openedMixin = (theme: Theme): CSSObject => ({
-  width: drawerWidth,
+interface DrawerPropsExtended extends DrawerProps {
+  sidebarOpenWidth: number;
+  sidebarClosedWidth: number;
+}
+
+const openedMixin = (theme: Theme, sidebarOpenWidth: number): CSSObject => ({
+  width: sidebarOpenWidth + 'px',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -39,16 +46,16 @@ const openedMixin = (theme: Theme): CSSObject => ({
   overflowX: 'hidden',
 });
 
-const closedMixin = (theme: Theme): CSSObject => ({
+const closedMixin = (theme: Theme, sidebarClosedWidth: number): CSSObject => ({
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
+  width: `calc(${sidebarClosedWidth}px + 1px)`,
+  // [theme.breakpoints.up('sm')]: {
+  //   width: `calc(${sidebarClosedWidth}px + 9px)`,
+  // },
 });
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -61,21 +68,28 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
-  whiteSpace: 'nowrap',
-  boxSizing: 'border-box',
-  ...(open && {
-    ...openedMixin(theme),
-    '& .MuiDrawer-paper': openedMixin(theme),
+  shouldForwardProp: (prop) =>
+    prop !== 'open' &&
+    prop !== 'sidebarOpenWidth' &&
+    prop !== 'sidebarClosedWidth',
+})<DrawerPropsExtended>(
+  ({ theme, open, sidebarOpenWidth, sidebarClosedWidth }) => ({
+    // width: sidebarOpenWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+    boxSizing: 'border-box',
+    ...(open &&
+      sidebarOpenWidth && {
+        ...openedMixin(theme, sidebarOpenWidth),
+        '& .MuiDrawer-paper': openedMixin(theme, sidebarOpenWidth),
+      }),
+    ...(!open &&
+      sidebarClosedWidth && {
+        ...closedMixin(theme, sidebarClosedWidth),
+        '& .MuiDrawer-paper': closedMixin(theme, sidebarClosedWidth),
+      }),
   }),
-  ...(!open && {
-    ...closedMixin(theme),
-    '& .MuiDrawer-paper': closedMixin(theme),
-  }),
-}));
+);
 
 /**
  * Sidebar component
@@ -86,12 +100,20 @@ const Drawer = styled(MuiDrawer, {
 export default function SidebarComponent({
   open,
   onToggle,
+  appBarHeight,
+  sidebarOpenWidth,
+  sidebarClosedWidth,
 }: SidebarComponentProps): JSX.Element {
   const theme = useTheme();
 
   return (
-    <Drawer variant='permanent' open={open}>
-      <DrawerHeader>
+    <Drawer
+      variant='permanent'
+      open={open}
+      sidebarOpenWidth={sidebarOpenWidth}
+      sidebarClosedWidth={sidebarClosedWidth}
+    >
+      <DrawerHeader sx={{ height: appBarHeight }}>
         <IconButton onClick={onToggle}>
           {theme.direction === 'rtl' ? (
             <ChevronRightIcon />

@@ -10,8 +10,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import UnderConstructionComponent from './components/UnderConstructionComponent/UnderConstructionComponent';
 import './App.css';
 
-// TODO: Externalise these
+// TODO: Move these specs into a theme configuration so as not to have them passed as props
 const appBarHeight = 64;
+const sidebarClosedWidth = 66;
+const sidebarOpenWidth = 272;
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -25,10 +27,9 @@ function App() {
       display='flex'
       flexDirection='column'
       mt={appBarHeight + 'px'}
-      // TODO: Externalize this
-      ml={'66px'}
+      ml={sidebarClosedWidth + 'px'}
       height={`calc(100vh - ${appBarHeight}px)`}
-      width={`calc(100vw - 66px)`}
+      width={`calc(100vw -  ${sidebarClosedWidth}px)`}
       overflow='hidden'
       position='relative'
     >
@@ -36,12 +37,20 @@ function App() {
 
       <BrowserRouter>
         <HeaderComponent
-          appBarHeight={appBarHeight}
           open={drawerOpen}
           onToggle={handleDrawerToggle}
+          appBarHeight={appBarHeight}
+          sidebarClosedWidth={sidebarClosedWidth}
+          sidebarOpenWidth={sidebarOpenWidth}
         />
 
-        <SidebarComponent open={drawerOpen} onToggle={handleDrawerToggle} />
+        <SidebarComponent
+          open={drawerOpen}
+          onToggle={handleDrawerToggle}
+          appBarHeight={appBarHeight}
+          sidebarClosedWidth={sidebarClosedWidth}
+          sidebarOpenWidth={sidebarOpenWidth}
+        />
 
         <MainContentContainer
           routeComponent={
