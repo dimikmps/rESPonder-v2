@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -6,7 +10,7 @@
   border: 1px solid red
 } */
 
-html {
+/* html {
   height: 100%;
   width: 100%;
 }
@@ -25,4 +29,4 @@ div#root {
 div.app {
   height: 100%;
   width: 100%;
-}
+} */
