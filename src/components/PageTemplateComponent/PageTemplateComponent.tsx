@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
 interface PageTemplateComponentProps {
@@ -16,6 +16,8 @@ const PageTemplateComponent = ({
   pageTitle,
   children,
 }: PageTemplateComponentProps): JSX.Element => {
+  const theme = useTheme();
+
   const [contentHeight, setContentHeight] = useState<string>('100px');
 
   const ref = useRef<HTMLInputElement>(null);
@@ -32,6 +34,8 @@ const PageTemplateComponent = ({
       textAlign={'center'}
       width='100%'
       height='100%'
+      p={theme.spacing(3)}
+      gap={3}
     >
       <Typography ref={ref} variant='h4'>
         {pageTitle}

@@ -26,7 +26,7 @@ const MainContentContainerComponent = ({
       overflow='auto'
       // Use/override this to force padding on the right of the main content area (i.e. each routable page)
       // Aligns each page's content to the center, as per the sidebar that is rendered on the left
-      // pr={theme.custom.appBarHeight}
+      // pr={theme.custom.sidebarClosedWidth}
     >
       {routeComponent}
     </Box>

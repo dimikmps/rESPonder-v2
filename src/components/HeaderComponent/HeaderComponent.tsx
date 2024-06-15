@@ -66,7 +66,9 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
           noWrap
           component='div'
           textAlign='center'
-          sx={{ width: '100%' }}
+          width={'100%'}
+          // TODO: Provide a better means of handling title alignment
+          ml={theme.spacing(5)}
         >
           <Link to='/' style={{ color: 'inherit', textDecoration: 'none' }}>
             rESPonder v.2

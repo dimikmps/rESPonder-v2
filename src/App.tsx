@@ -42,7 +42,7 @@ function App() {
               />
               <Route
                 path='/contact'
-                element={<UnderConstructionPage page='Support' />}
+                element={<UnderConstructionPage page='Contact' />}
               />
               <Route
                 path='/about'

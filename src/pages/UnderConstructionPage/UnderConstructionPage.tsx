@@ -1,4 +1,5 @@
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+import PageTemplateComponent from '../../components/PageTemplateComponent/PageTemplateComponent';
 
 interface UnderConstructionComponentProps {
   page: string;
@@ -14,19 +15,18 @@ const UnderConstructionPage = ({
   page,
 }: UnderConstructionComponentProps): JSX.Element => {
   return (
-    <Box
-      display='flex'
-      flexDirection='column'
-      justifyContent='space-around'
-      width='100%'
-    >
-      <Typography textAlign='center' variant='h5'>
-        {page}
-      </Typography>
-      <Typography textAlign='center' variant='h6'>
+    <PageTemplateComponent pageTitle={page}>
+      <Typography
+        display='flex'
+        flexDirection='column'
+        justifyContent='space-around'
+        width='100%'
+        textAlign='center'
+        variant='h6'
+      >
         Under construction
       </Typography>
-    </Box>
+    </PageTemplateComponent>
   );
 };
 
