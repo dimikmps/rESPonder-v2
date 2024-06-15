@@ -156,6 +156,10 @@ Follow the steps below to get the project up and running:
   - [ ] Indoor positioning view
   - [ ] Contact view
   - [ ] About view
+- [ ] Multiple sensors handling
+  - [ ] Extend API
+  - [ ] Create Context 
+  - [ ] Refactor pages
 - [ ] Unit testing
   - [ ] Homepage test
   - [ ] Latest sensor readings test
