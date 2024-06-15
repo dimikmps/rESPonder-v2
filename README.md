@@ -150,12 +150,16 @@ Follow the steps below to get the project up and running:
   - [x] Create mock/randomized sensor data to be used for the purpose of the live demo
   - [x] Create mock API to fetch sensor data
 - [ ] App sections
-  - [ ] Homepage view
-  - [ ] Latest sensor readings view
+  - [x] Homepage view
+  - [x] Latest sensor readings view
   - [ ] Map view
   - [ ] Indoor positioning view
   - [ ] Contact view
   - [ ] About view
+- [ ] Multiple sensors handling
+  - [ ] Extend API
+  - [ ] Create Context 
+  - [ ] Refactor pages
 - [ ] Unit testing
   - [ ] Homepage test
   - [ ] Latest sensor readings test

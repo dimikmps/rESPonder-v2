@@ -21,6 +21,12 @@ declare module '@mui/material/styles' {
 
 // Define your custom properties
 const customTheme = {
+  palette: {
+    // Override default colours
+    primary: {
+      main: '#e69700',
+    },
+  },
   custom: {
     appBarHeight: '64px',
     sidebarClosedWidth: '66px',
