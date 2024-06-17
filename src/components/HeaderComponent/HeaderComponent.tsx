@@ -1,8 +1,18 @@
-import { Toolbar, Typography, styled, useTheme } from '@mui/material';
+import { useState } from 'react';
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Toolbar,
+  styled,
+  useTheme,
+} from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
 
 interface MainAppBarProps {
   open: boolean;
@@ -43,6 +53,12 @@ const Header = styled(MuiAppBar, {
 const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
   const theme = useTheme();
 
+  const [selectedSensor, setSelectedSensor] = useState<string>('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setSelectedSensor(event.target.value);
+  };
+
   return (
     <Header position='fixed' open={open}>
       <Toolbar sx={{ height: theme.custom.appBarHeight }}>
@@ -55,25 +71,97 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
             ...(open && { display: 'none' }),
             // Fixes the issue with the hamburger button not aligning properly with the rest of the sidebar icons
             // TODO: Find a better solution
-            marginLeft: { xs: '-4px', sm: '-12px' },
+            // marginLeft: { xs: '-4px', sm: '-12px' },
             // marginRight: { xs: '-4px', sm: '-12px' },
           }}
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          variant='h6'
-          noWrap
-          component='div'
-          textAlign='center'
-          width={'100%'}
-          // TODO: Provide a better means of handling title alignment
-          ml={theme.spacing(5)}
-        >
-          <Link to='/' style={{ color: 'inherit', textDecoration: 'none' }}>
-            rESPonder v.2
-          </Link>
-        </Typography>
+        <Box width='100%' ml={theme.spacing(5)} sx={{ flexGrow: 1 }}>
+          {/* <Grid container>
+            <Grid
+              item
+              sm={3}
+              sx={{ display: open ? 'none' : { xs: 'none', sm: 'block' } }}
+            />
+            <Grid
+              item
+              sm={6}
+              sx={{
+                display: open ? { xs: 'none' } : { xs: 'none', sm: 'block' },
+              }}
+            >
+              <Link to='/' style={{ color: 'inherit', textDecoration: 'none' }}>
+                <Typography
+                  variant='h6'
+                  noWrap
+                  component='div'
+                  textAlign='center'
+                  display='flex'
+                  flexDirection='column'
+                  justifyContent='space-around'
+                  height='100%'
+                >
+                  rESPonder v.2
+                </Typography>
+              </Link>
+            </Grid>
+            <Grid item xs={12} sm={open ? 12 : 3}>
+              <FormControl size='small' sx={{ width: '100%' }}>
+                <InputLabel id='select-small-label'>Sensor</InputLabel>
+                <Select
+                  labelId='select-small-label'
+                  id='select-small'
+                  value={selectedSensor}
+                  label='Sensor'
+                  onChange={handleChange}
+                  sx={{
+                    color: "white",
+                    '.MuiOutlinedInput-notchedOutline': {
+                      // borderColor: 'rgba(0, 0, 0, 0.12)',
+                      borderColor: theme.palette.primary.main
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(0, 0, 0, 0.12)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'rgba(0, 0, 0, 0.25)',
+                    },
+                    '.MuiSvgIcon-root ': {
+                      fill: "rgba(0, 0, 0, 0.12) !important",
+                    }
+                  }}
+                >
+                  <MenuItem value={''}>
+                    {' '}
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={1}>Sensor 1</MenuItem>
+                  <MenuItem value={2}>Sensor 2</MenuItem>
+                  <MenuItem value={3}>Sensor 3</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid> */}
+          <FormControl size='small' sx={{ width: '100%' }}>
+            <InputLabel id='select-small-label'>Sensor</InputLabel>
+            <Select
+              labelId='select-small-label'
+              id='select-small'
+              value={selectedSensor}
+              label='Sensor'
+              onChange={handleChange}
+            >
+              <MenuItem value={''}>
+                {' '}
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={1}>Sensor 1</MenuItem>
+              <MenuItem value={2}>Sensor 2</MenuItem>
+              <MenuItem value={3}>Sensor 3</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
       </Toolbar>
     </Header>
   );
