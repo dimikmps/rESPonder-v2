@@ -1,7 +1,6 @@
 import { delay, http, HttpResponse } from 'msw';
 import { generateMockResponse } from '../utils/generateMockResponse';
 
-// TODO: Replace these with dynamic get by id
 // TODO: Change these urls to the GH pages equivalents once deployed
 export const handlers = [
   // Module sensor data

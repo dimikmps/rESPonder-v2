@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import {
   Box,
   FormControl,
@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { SensorContext } from '../../contexts/SensorContext';
 
 interface MainAppBarProps {
   open: boolean;
@@ -74,7 +75,13 @@ const CustomisedInput = styled(InputBase)(({ theme }) => ({
 const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
   const theme = useTheme();
 
-  const [selectedSensor, setSelectedSensor] = useState<string>('');
+  const selectedSensorContext = useContext(SensorContext);
+
+  if (!selectedSensorContext) {
+    throw new Error('There was something wrong with the Sensor Provider');
+  }
+
+  const { selectedSensor, setSelectedSensor } = selectedSensorContext;
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedSensor(event.target.value);

@@ -9,9 +9,9 @@ const generateRandomNumberInRange = (min: number, max: number) => {
   return result;
 };
 
-// TODO: Alter this in order to accommodate for different devices (i.e. not only device-1)
+// Currently supports up to 3 mock responses (i.e. 3 devices) for the presentation purposes
 export const generateMockResponse = (id: string): SensorData | [] => {
-  if (!(Number(id) > 0 && Number(id) < 3)) {
+  if (Number(id) > 3) {
     return [];
   }
 
