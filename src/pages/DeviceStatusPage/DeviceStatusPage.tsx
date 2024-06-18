@@ -15,14 +15,25 @@ const DeviceStatusPage = (): JSX.Element => {
   const [mockData, setMockData] = useState<SensorData[] | []>([]);
 
   useEffect(() => {
-    // Fetch data every 5sec
-    const interval = setInterval(() => {
-      fetch('http://localhost:5173/api/v1/module')
-        .then((res) => res.json())
-        .then((res) => {
-          setMockData((prevArray) => [res, ...prevArray]);
-        });
-    }, 3000);
+    const fetchData = async () => {
+      try {
+        // TODO: Add id setting by context provider
+        // TODO: Add error boundary
+        const response = await fetch('http://localhost:5173/api/v1/sensor/1');
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setMockData((prevArray) => [data, ...prevArray]);
+      } catch (error) {
+        // TODO: Create an error boundary instead
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    const interval = setInterval(fetchData, 5000); // Fetch data every 5 seconds
+
+    // Clean up interval on component unmount
     return () => clearInterval(interval);
   }, []);
 

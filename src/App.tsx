@@ -27,6 +27,7 @@ function App() {
 
         <SidebarComponent open={drawerOpen} onToggle={handleDrawerToggle} />
 
+        {/* TODO: Add error boundary */}
         <MainContentContainer
           routeComponent={
             <Routes>
