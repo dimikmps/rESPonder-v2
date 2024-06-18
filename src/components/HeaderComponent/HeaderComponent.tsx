@@ -2,14 +2,18 @@ import { useState } from 'react';
 import {
   Box,
   FormControl,
+  Grid,
+  InputBase,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
   Toolbar,
+  Typography,
   styled,
   useTheme,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -42,6 +46,25 @@ const Header = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
+}));
+
+const CustomisedInput = styled(InputBase)(({ theme }) => ({
+  '& .MuiInputBase-input': {
+    borderRadius: 25,
+    backgroundColor: theme.palette.background.paper,
+    // border: '1px solid #ced4da',
+    // fontSize: 16,
+    padding: theme.spacing(1),
+    '&:focus': {
+      borderRadius: 25,
+
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    },
+  },
+  '&:hover': {
+    borderRadius: 25,
+    boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+  },
 }));
 
 /**
@@ -78,17 +101,23 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
           <MenuIcon />
         </IconButton>
         <Box width='100%' ml={theme.spacing(5)} sx={{ flexGrow: 1 }}>
-          {/* <Grid container>
+          <Grid container>
             <Grid
               item
               sm={3}
-              sx={{ display: open ? 'none' : { xs: 'none', sm: 'block' } }}
+              sx={{
+                display: open
+                  ? { xs: 'none', md: 'block' }
+                  : { xs: 'none', sm: 'block' },
+              }}
             />
             <Grid
               item
               sm={6}
               sx={{
-                display: open ? { xs: 'none' } : { xs: 'none', sm: 'block' },
+                display: open
+                  ? { xs: 'none', md: 'block' }
+                  : { xs: 'none', sm: 'block' },
               }}
             >
               <Link to='/' style={{ color: 'inherit', textDecoration: 'none' }}>
@@ -106,30 +135,34 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
                 </Typography>
               </Link>
             </Grid>
-            <Grid item xs={12} sm={open ? 12 : 3}>
+            <Grid item xs={12} sm={open ? 12 : 3} md={3}>
               <FormControl size='small' sx={{ width: '100%' }}>
-                <InputLabel id='select-small-label'>Sensor</InputLabel>
+                <InputLabel
+                  id='select-small-label'
+                  sx={{
+                    '&.Mui-focused': {
+                      color: 'transparent',
+                    },
+                  }}
+                >
+                  Sensor
+                </InputLabel>
                 <Select
                   labelId='select-small-label'
                   id='select-small'
                   value={selectedSensor}
                   label='Sensor'
                   onChange={handleChange}
-                  sx={{
-                    color: "white",
-                    '.MuiOutlinedInput-notchedOutline': {
-                      // borderColor: 'rgba(0, 0, 0, 0.12)',
-                      borderColor: theme.palette.primary.main
+                  input={<CustomisedInput />}
+                  MenuProps={{
+                    PaperProps: {
+                      sx: {
+                        '& .MuiMenuItem-root': {
+                          display: 'flex',
+                          justifyContent: 'center',
+                        },
+                      },
                     },
-                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                      borderColor: 'rgba(0, 0, 0, 0.12)',
-                    },
-                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: 'rgba(0, 0, 0, 0.25)',
-                    },
-                    '.MuiSvgIcon-root ': {
-                      fill: "rgba(0, 0, 0, 0.12) !important",
-                    }
                   }}
                 >
                   <MenuItem value={''}>
@@ -142,25 +175,7 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
                 </Select>
               </FormControl>
             </Grid>
-          </Grid> */}
-          <FormControl size='small' sx={{ width: '100%' }}>
-            <InputLabel id='select-small-label'>Sensor</InputLabel>
-            <Select
-              labelId='select-small-label'
-              id='select-small'
-              value={selectedSensor}
-              label='Sensor'
-              onChange={handleChange}
-            >
-              <MenuItem value={''}>
-                {' '}
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={1}>Sensor 1</MenuItem>
-              <MenuItem value={2}>Sensor 2</MenuItem>
-              <MenuItem value={3}>Sensor 3</MenuItem>
-            </Select>
-          </FormControl>
+          </Grid>
         </Box>
       </Toolbar>
     </Header>
