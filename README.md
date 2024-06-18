@@ -143,6 +143,7 @@ Follow the steps below to get the project up and running:
   - [x] Add Header component
   - [x] Add Footer component
   - [x] Add Routing
+  - [x] Add Error boundary component
 - [x] Linting/formatting
   - [x] Add formatting configuration
   - [x] Add pre-commit linting and formatting
@@ -152,6 +153,7 @@ Follow the steps below to get the project up and running:
 - [ ] App sections
   - [x] Homepage view
   - [x] Latest sensor readings view
+  - [ ] Detailed per-sensor view
   - [ ] Map view
   - [ ] Indoor positioning view
   - [ ] Contact view
@@ -159,7 +161,7 @@ Follow the steps below to get the project up and running:
 - [x] Multiple sensors handling
   - [x] Extend API
   - [x] Create Context 
-  - [x] Refactor pages
+  - [x] Refactor pages to acommodate changes
 - [ ] Unit testing
   - [ ] Homepage test
   - [ ] Latest sensor readings test

@@ -82,12 +82,17 @@ const DeviceStatusPage = (): JSX.Element => {
                 key={index}
                 sx={{ borderBottom: `1px solid lightgrey` }}
               >
-                <ListItemText primary={`Reading taken: ${mockDataItem.ts}`} />
+                <ListItemText
+                  primary={`Reading taken: ${mockDataItem.ts}`}
+                  sx={{ textAlign: 'left' }}
+                />
                 <ListItemText
                   secondary={`Known devices: ${mockDataItem.kn.length}`}
+                  sx={{ textAlign: 'center' }}
                 />
                 <ListItemText
                   secondary={`Unknown devices: ${mockDataItem.unk}`}
+                  sx={{ textAlign: 'right' }}
                 />
               </ListItem>
             );

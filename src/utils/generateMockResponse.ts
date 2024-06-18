@@ -43,6 +43,6 @@ export const generateMockResponse = (id: string): SensorData | [] => {
               },
             ]
           : [],
-    ts: new Date().toLocaleString(),
+    ts: new Date().toLocaleString('en-GB'),
   };
 };
