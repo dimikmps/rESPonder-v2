@@ -50,14 +50,12 @@ const Header = styled(MuiAppBar, {
 
 const CustomisedInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
+    textAlign: 'center',
     borderRadius: 25,
     backgroundColor: theme.palette.background.paper,
-    // border: '1px solid #ced4da',
-    // fontSize: 16,
     padding: theme.spacing(1),
     '&:focus': {
       borderRadius: 25,
-
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
     },
   },
@@ -140,6 +138,7 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
                 <InputLabel
                   id='select-small-label'
                   sx={{
+                    color: selectedSensor != '' ? 'transparent' : 'grey',
                     '&.Mui-focused': {
                       color: 'transparent',
                     },
