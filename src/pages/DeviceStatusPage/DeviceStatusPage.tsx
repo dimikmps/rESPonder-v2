@@ -9,7 +9,7 @@ import { SensorContext } from '../../contexts/SensorContext';
 
 /**
  * Device status page
- * Displays sensor data fetch every 5"
+ * Displays sensor data fetch every second
  * @returns {JSX.Element} - The DeviceStatusPage JSX element.
  */
 const DeviceStatusPage = (): JSX.Element => {
@@ -42,7 +42,7 @@ const DeviceStatusPage = (): JSX.Element => {
         }
     };
 
-    const interval = setInterval(fetchData, 5000); // Fetch data every 5 seconds
+    const interval = setInterval(fetchData, 1000); // Fetch data every 1 second
 
     // Clean up interval on component unmount
     return () => clearInterval(interval);
@@ -74,6 +74,20 @@ const DeviceStatusPage = (): JSX.Element => {
           disablePadding={true}
           sx={{ maxHeight: '100%', width: '100%', overflow: 'auto' }}
         >
+          <ListItem key={'header'} sx={{ borderBottom: `1px solid lightgrey` }}>
+            <ListItemText
+              primary={`Reading timestamp`}
+              sx={{ width: '33%', textAlign: 'center' }}
+            />
+            <ListItemText
+              primary={`Known Devices`}
+              sx={{ width: '33%', textAlign: 'center' }}
+            />
+            <ListItemText
+              primary={`Unknown Devices`}
+              sx={{ width: '33%', textAlign: 'center' }}
+            />
+          </ListItem>
           {mockData.map((mockDataItem, index) => {
             return (
               <ListItem
@@ -81,16 +95,16 @@ const DeviceStatusPage = (): JSX.Element => {
                 sx={{ borderBottom: `1px solid lightgrey` }}
               >
                 <ListItemText
-                  primary={`Reading taken: ${mockDataItem.ts}`}
-                  sx={{ textAlign: 'left' }}
+                  secondary={mockDataItem.ts}
+                  sx={{ width: '33%', textAlign: 'center' }}
                 />
                 <ListItemText
-                  secondary={`Known devices: ${mockDataItem.kn.length}`}
-                  sx={{ textAlign: 'center' }}
+                  secondary={mockDataItem.kn.length}
+                  sx={{ width: '33%', textAlign: 'center' }}
                 />
                 <ListItemText
-                  secondary={`Unknown devices: ${mockDataItem.unk}`}
-                  sx={{ textAlign: 'right' }}
+                  secondary={mockDataItem.unk}
+                  sx={{ width: '33%', textAlign: 'center' }}
                 />
               </ListItem>
             );

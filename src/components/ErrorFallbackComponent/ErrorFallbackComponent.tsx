@@ -5,6 +5,12 @@ interface ErrorFallbackComponentProps {
   resetErrorBoundary: () => void;
 }
 
+/**
+ * Error Fallback COmponent
+ * The component displayed when an error is caught within the Error Boundary
+ * @param {() => void} resetErrorBoundary  -The action to reset the error state
+ * @returns {JSX.Element} - The ErrorFallbackComponent JSX element.
+ */
 const ErrorFallbackComponent = ({
   resetErrorBoundary,
 }: ErrorFallbackComponentProps) => {
