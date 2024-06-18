@@ -9,23 +9,40 @@ const generateRandomNumberInRange = (min: number, max: number) => {
   return result;
 };
 
-// TODO: Alter this in order to accommodate for different devices (i.e. not only device-1)
-export const generateMockResponse = (): SensorData => {
-  const mockResponse = {
-    id: '1',
-    unk: generateRandomNumberInRange(18, 20),
-    kn: [
-      {
-        dev: 'Despoina',
-        rssi: '-' + generateRandomNumberInRange(50, 60),
-      },
-      {
-        dev: 'Dimitris',
-        rssi: '-' + generateRandomNumberInRange(60, 70),
-      },
-    ],
-    ts: new Date().toLocaleString(),
-  };
+// Currently supports up to 3 mock responses (i.e. 3 devices) for the presentation purposes
+export const generateMockResponse = (id: string): SensorData | [] => {
+  if (Number(id) > 3) {
+    return [];
+  }
 
-  return mockResponse;
+  return {
+    id: String(id),
+    unk:
+      id == '1'
+        ? generateRandomNumberInRange(18, 20)
+        : id == '2'
+          ? generateRandomNumberInRange(2, 3)
+          : generateRandomNumberInRange(9, 10),
+    kn:
+      id == '1'
+        ? [
+            {
+              dev: 'Despoina',
+              rssi: '-' + generateRandomNumberInRange(50, 60),
+            },
+            {
+              dev: 'Dimitris',
+              rssi: '-' + generateRandomNumberInRange(60, 70),
+            },
+          ]
+        : id == '2'
+          ? [
+              {
+                dev: 'Elias',
+                rssi: '-' + generateRandomNumberInRange(45, 50),
+              },
+            ]
+          : [],
+    ts: new Date().toLocaleString('en-GB'),
+  };
 };
