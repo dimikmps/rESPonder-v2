@@ -29,7 +29,6 @@ const DeviceStatusPage = (): JSX.Element => {
     const fetchData = async () => {
       if (selectedSensor !== '')
         try {
-          // TODO: Add error boundary
           const response = await fetch(
             `http://localhost:5173/api/v1/sensor/${selectedSensor}`,
           );
@@ -39,8 +38,7 @@ const DeviceStatusPage = (): JSX.Element => {
           const data = await response.json();
           setMockData((prevArray) => [data, ...prevArray]);
         } catch (error) {
-          // TODO: Create an error boundary instead
-          console.error('Error fetching data:', error);
+          console.error('Error fetching data');
         }
     };
 
