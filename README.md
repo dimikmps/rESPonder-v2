@@ -57,13 +57,16 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-rESPonder is the client-facing segment of a multi-tier Internet of Things (IoT) application, aimed at assisting emergency services in organizing and managing disaster relief situations. 
 
-As the name suggests, the platform benefits from the use of ESP32 microcontrolers (i.e. r-ESP-onder) as the basis of data acquisition. Overall, a network of autonomous ESP32 microcontrollers is programmed to detect Wi-Fi devices within their vicinity, with various metrics such as RSSI being gathered and transmitted via LoRa to a custom ESP32-based centralized node. The latter in turn relays the data via MQTT to AWS where it's handled and stored with IoT Core and DynamoDB respectively.
+rESPonder is the client-facing segment of a multi-tier Internet of Things (IoT) application aimed at assisting emergency services in organizing and managing disaster relief situations.
 
-At the Cloud domain a set of Lambda functions is used to calculate distance from deployed ESP nodes by executing a set of RSSI-based proximity calculation formulae, while an API serves this information to the rESPonder front-end client, which originally is hosted on S3.
+As the name suggests, the platform benefits from the use of ESP32 microcontrollers (i.e., r-ESP-onder) as the basis of data acquisition. A network of autonomous ESP32 microcontrollers is programmed to detect Wi-Fi devices within their vicinity, gathering various metrics such as RSSI, which are transmitted via LoRa to a custom ESP32-based centralized node. From there, the data is relayed via MQTT to AWS, where it is processed and stored using IoT Core and DynamoDB, respectively.In the cloud domain, Lambda functions are employed to calculate distances from deployed ESP nodes using RSSI-based proximity calculation formulas. An API serves this information to the rESPonder front-end client, originally hosted on S3.
 
-The current (v2) implementation is an updated version of the original front-end implementation, serving to demonstrate the final product and the application's overall functionality/purpose in a better and more user-friendly manner. It makes use of Mock Service Worker to fetch randomised sensor data periodically, as the original deployment of ESP sensors & AWS infrastructure is no longer active.
+The current (v2) implementation is an updated version of the original front-end, designed to demonstrate the final product and enhance user-friendliness. Key features of this implementation include:
+
+- Implementation of Mock Service Worker to periodically fetch randomized sensor data, simulating data retrieval from the original deployment of ESP sensors and AWS infrastructure (which is no longer active).
+- Utilization of React Router for routing and re-rendering only the content element, maintaining consistency across foundational elements such as the header and sidebar.
+- Integration of the Context API to manage information such as the selected sensor throughout various sections of the application. Secondary logic relies on efficient context handling for data flow and state management.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
