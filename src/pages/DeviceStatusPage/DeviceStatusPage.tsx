@@ -24,51 +24,55 @@ const DeviceStatusPage = (): JSX.Element => {
   const [mockData, setMockData] = useState<SensorData[] | []>([]);
 
   useEffect(() => {
+    // Clear previous data
     setMockData([]);
 
-    const fetchData = async () => {
-      if (selectedSensor !== '')
+    if (selectedSensor !== '') {
+      // Utilise abort signal to immediately stop any fetching once the sensor is switched
+      const fetchData = async (signal: AbortSignal) => {
         try {
           const response = await fetch(
             `http://localhost:5173/api/v1/sensor/${selectedSensor}`,
+            { signal },
           );
           if (!response.ok) {
             throw new Error('Failed to fetch data');
           }
           const data = await response.json();
           setMockData((prevArray) => [data, ...prevArray]);
-        } catch (error) {
-          console.error('Error fetching data');
+        } catch (err) {
+          // Do nothing
         }
-    };
+      };
 
-    const interval = setInterval(fetchData, 1000); // Fetch data every 1 second
+      const controller = new AbortController();
+      const signal = controller.signal;
 
-    // Clean up interval on component unmount
-    return () => clearInterval(interval);
+      // Initial fetch
+      fetchData(signal);
+
+      // Set up interval to fetch data every second
+      const interval = setInterval(() => fetchData(signal), 1000);
+
+      // Clean up: abort fetch and clear interval on component unmount or if selectedSensor changes
+      return () => {
+        controller.abort();
+        clearInterval(interval);
+      };
+    }
   }, [selectedSensor]);
 
   return (
     <PageTemplateComponent pageTitle='Sensor data streaming'>
-      {!mockData || mockData.length == 0 ? (
-        !selectedSensor ? (
-          <Typography
-            alignContent={'center'}
-            textAlign={'inherit'}
-            width='100%'
-          >
-            Please select a sensor to continue
-          </Typography>
-        ) : (
-          // TODO: Add a spinner or something
-          <Typography
-            alignContent={'center'}
-            textAlign={'inherit'}
-            width='100%'
-          >
-            Sensor data loading...
-          </Typography>
-        )
+      {!selectedSensor || selectedSensor == '' ? (
+        <Typography alignContent={'center'} textAlign={'inherit'} width='100%'>
+          Please select a sensor to continue
+        </Typography>
+      ) : !mockData || mockData.length == 0 ? (
+        // TODO: Add a spinner or something
+        <Typography alignContent={'center'} textAlign={'inherit'} width='100%'>
+          Sensor data loading...
+        </Typography>
       ) : (
         <List
           disablePadding={true}
