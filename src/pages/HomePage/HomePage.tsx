@@ -1,10 +1,23 @@
 import { Box, Typography } from '@mui/material';
+import { useContext } from 'react';
+import { SensorContext } from '../../contexts/SensorContext';
 
 /**
  * Homepage component
  * @returns {JSX.Element} - The HomePageComponent JSX element.
  */
 const HomePage = (): JSX.Element => {
+  const selectedSensorContext = useContext(SensorContext);
+
+  if (!selectedSensorContext) {
+    throw new Error('There was something wrong with the Sensor Provider');
+  }
+
+  const { setSelectedSensor } = selectedSensorContext;
+
+  // Reset selected sensor when visiting the homepage
+  setSelectedSensor('');
+
   return (
     <Box display='flex' flexDirection='column' justifyContent='space-around'>
       <Box display='flex' justifyContent='center' width='100%'>
