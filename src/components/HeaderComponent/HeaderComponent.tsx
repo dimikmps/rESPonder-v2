@@ -4,6 +4,7 @@ import {
   FormControl,
   Grid,
   InputBase,
+  InputBaseProps,
   InputLabel,
   MenuItem,
   Select,
@@ -13,7 +14,7 @@ import {
   styled,
   useTheme,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -29,6 +30,10 @@ type PropsToOmit = 'onToggle' | 'appBarHeight';
 interface HeaderProps
   extends MuiAppBarProps,
     Omit<MainAppBarProps, PropsToOmit> {}
+
+interface StyledDropdownProps extends InputBaseProps {
+  isHomepage: boolean;
+}
 
 const Header = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -49,7 +54,9 @@ const Header = styled(MuiAppBar, {
   }),
 }));
 
-const CustomisedInput = styled(InputBase)(({ theme }) => ({
+const CustomisedInput = styled(InputBase, {
+  shouldForwardProp: (prop) => prop !== 'isHomepage',
+})<StyledDropdownProps>(({ theme, isHomepage }) => ({
   '& .MuiInputBase-input': {
     textAlign: 'center',
     borderRadius: 25,
@@ -60,10 +67,12 @@ const CustomisedInput = styled(InputBase)(({ theme }) => ({
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
     },
   },
-  '&:hover': {
-    borderRadius: 25,
-    boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-  },
+  '&:hover': !isHomepage
+    ? {
+        borderRadius: 25,
+        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+      }
+    : {},
 }));
 
 /**
@@ -74,6 +83,11 @@ const CustomisedInput = styled(InputBase)(({ theme }) => ({
  */
 const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
   const theme = useTheme();
+
+  // Deduce if user is on homepage so that thhe device dropdown and styling is disabled
+  const location = String(useLocation().pathname);
+
+  const isHomePage = location === '/';
 
   const selectedSensorContext = useContext(SensorContext);
 
@@ -141,7 +155,11 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
               </Link>
             </Grid>
             <Grid item xs={12} sm={open ? 12 : 3} md={3}>
-              <FormControl size='small' sx={{ width: '100%' }}>
+              <FormControl
+                size='small'
+                sx={{ width: '100%' }}
+                disabled={isHomePage}
+              >
                 <InputLabel
                   id='select-small-label'
                   sx={{
@@ -159,7 +177,7 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
                   value={selectedSensor}
                   label='Sensor'
                   onChange={handleChange}
-                  input={<CustomisedInput />}
+                  input={<CustomisedInput isHomepage={isHomePage} />}
                   MenuProps={{
                     PaperProps: {
                       sx: {
