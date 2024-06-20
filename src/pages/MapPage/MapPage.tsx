@@ -3,8 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import { Box, Typography } from '@mui/material';
 import { useContext, useEffect, useRef, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MockLocationDataType } from '../../utils/generateMockLocationData';
 import { SensorContext } from '../../contexts/SensorContext';
+import { SensorLocationDataType } from '../../interfaces/SensorLocationData.interface';
 
 /**
  * Map Page View
@@ -26,7 +26,7 @@ const MapPage = (): JSX.Element => {
   const { selectedSensor } = selectedSensorContext;
 
   const [mockLocationData, setMockLocationData] = useState<
-    MockLocationDataType[]
+    SensorLocationDataType[]
   >([]);
 
   const ref = useRef<HTMLInputElement>(null);

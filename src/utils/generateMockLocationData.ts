@@ -1,10 +1,4 @@
-import { LatLngExpression } from 'leaflet';
-
-export interface MockLocationDataType {
-  id: string;
-  coordinates: LatLngExpression;
-  designation?: string;
-}
+import { SensorLocationDataType } from '../interfaces/SensorLocationData.interface';
 
 /**
  * generateMockLocationData
@@ -12,7 +6,7 @@ export interface MockLocationDataType {
  * Currently returns coordinates for the centralised node and the 3 deployed sensing nodes
  * @returns {LatLngExpression[]} - Mock location array
  */
-const generateMockLocationData = (): MockLocationDataType[] => {
+const generateMockLocationData = (): SensorLocationDataType[] => {
   return [
     {
       id: '0',
