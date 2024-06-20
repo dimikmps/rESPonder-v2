@@ -144,6 +144,7 @@ const MapPage = (): JSX.Element => {
         <MapContainer
           center={[39.9417, 23.6628]}
           zoom={13}
+          minZoom={7}
           scrollWheelZoom={true}
           style={{ height: `calc(100vh - ${contentHeight})`, width: '100wh' }}
         >
