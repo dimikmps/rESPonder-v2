@@ -156,8 +156,7 @@ Follow the steps below to get the project up and running:
 - [ ] App sections
   - [x] Homepage view
   - [x] Latest sensor readings view
-  - [ ] Detailed per-sensor view
-  - [ ] Map view
+  - [x] Map view
   - [ ] Indoor positioning view
   - [ ] Contact view
   - [ ] About view
