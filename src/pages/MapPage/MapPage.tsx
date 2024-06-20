@@ -153,7 +153,6 @@ const MapPage = (): JSX.Element => {
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           />
           <Circle center={[39.9417, 23.6628]} fillColor='grey' radius={6000} />
-          68
           <Circle center={[39.9417, 23.6628]} fillColor='blue' radius={25} />
           {populateMapWithMarkers(selectedSensor)}
         </MapContainer>
