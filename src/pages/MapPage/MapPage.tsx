@@ -1,18 +1,15 @@
 import { useTheme } from '@mui/material/styles';
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  Circle,
-  //   Polyline,
-} from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import { Box, Typography } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
+import { MockLocationDataType } from '../../utils/generateMockLocationData';
+import { SensorContext } from '../../contexts/SensorContext';
 
 /**
  * Map Page View
+ * When no sensor is selected from the main dropdown, shows all the sensors currently deployed
+ * When a specific sensor is selected, shows the centralised node along with the selected sensor
  * @returns {JSX.Element} - The HomePageComponent JSX element.
  */
 const MapPage = (): JSX.Element => {
@@ -20,18 +17,112 @@ const MapPage = (): JSX.Element => {
 
   const [contentHeight, setContentHeight] = useState<string>('100px');
 
+  const selectedSensorContext = useContext(SensorContext);
+
+  if (!selectedSensorContext) {
+    throw new Error('There was something wrong with the Sensor Provider');
+  }
+
+  const { selectedSensor } = selectedSensorContext;
+
+  const [mockLocationData, setMockLocationData] = useState<
+    MockLocationDataType[]
+  >([]);
+
   const ref = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const fetchLocationData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5173/api/v1/sensor-locations/`,
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setMockLocationData(data);
+      } catch (err) {
+        // Do nothing
+      }
+    };
+
+    fetchLocationData();
+  }, []);
 
   useEffect(() => {
     ref.current && setContentHeight(ref.current.offsetHeight + 'px');
   }, [ref.current]);
 
-  // Calculate distance to draw a radius-based line from the center of the circle to its periphery
-  //   const earthRadius = 6378.137; //radius of the earth in kilometer
-  //   const pi = Math.PI;
-  //   const degreeConversion = 1 / (((2 * pi) / 360) * earthRadius) / 1000; //1 meter in degree
-  //   // TODO: Add this dynamically
-  //   const newLatitude = 23.6628 + 7800 * degreeConversion;
+  const populateMapWithMarkers = (id?: string) => {
+    // Return all locations if no ID is given
+    if (!id || id == '') {
+      return (
+        mockLocationData &&
+        mockLocationData.length > 0 &&
+        mockLocationData.map((mockSensorItem, index) => {
+          return (
+            <Marker
+              key={`marker-${index}`}
+              position={mockSensorItem.coordinates}
+            >
+              <Popup>
+                <div>
+                  {mockSensorItem.designation}:{' '}
+                  {(mockSensorItem.coordinates as [number, number])[0]}N -{' '}
+                  {(mockSensorItem.coordinates as [number, number])[1]}W
+                </div>
+              </Popup>
+            </Marker>
+          );
+        })
+      );
+    } else {
+      return (
+        mockLocationData &&
+        mockLocationData.length > 0 && (
+          <>
+            <Marker key={`marker-0`} position={mockLocationData[0].coordinates}>
+              <Popup>
+                <div>
+                  {mockLocationData[0].designation}:{' '}
+                  {(mockLocationData[0].coordinates as [number, number])[0]}N -{' '}
+                  {(mockLocationData[0].coordinates as [number, number])[1]}W
+                </div>
+              </Popup>
+            </Marker>
+
+            {mockLocationData[Number(selectedSensor)] && (
+              <Marker
+                key={selectedSensor}
+                position={mockLocationData[Number(selectedSensor)].coordinates}
+              >
+                <Popup>
+                  <div>
+                    {mockLocationData[Number(selectedSensor)].designation}:{' '}
+                    {
+                      (
+                        mockLocationData[Number(selectedSensor)]
+                          .coordinates as [number, number]
+                      )[0]
+                    }
+                    N -{' '}
+                    {
+                      (
+                        mockLocationData[Number(selectedSensor)]
+                          .coordinates as [number, number]
+                      )[1]
+                    }
+                    W
+                  </div>
+                </Popup>
+              </Marker>
+            )}
+          </>
+        )
+      );
+    }
+  };
 
   return (
     <Box
@@ -48,46 +139,24 @@ const MapPage = (): JSX.Element => {
         Map View
       </Typography>
 
-      <MapContainer
-        center={[39.9417, 23.6628]}
-        zoom={13}
-        scrollWheelZoom={true}
-        style={{ height: `calc(100vh - ${contentHeight})`, width: '100wh' }}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-        />
-        <Circle center={[39.9417, 23.6628]} fillColor='grey' radius={6000} />
-        68
-        <Circle center={[39.9417, 23.6628]} fillColor='blue' radius={25} />
-        {/* <Polyline
-          positions={[
-            [39.9417, 23.6628],
-            [39.9417, newLatitude],
-          ]}
-        /> */}
-        <Marker position={[39.9417, 23.6628]}>
-          <Popup>
-            <div>Centralised Node - Town Hall</div>
-          </Popup>
-        </Marker>
-        <Marker position={[39.9594, 23.6837]}>
-          <Popup>
-            <div>Sensor 1 - [39.9594, 23.6837]</div>
-          </Popup>
-        </Marker>
-        <Marker position={[39.93045, 23.72228]}>
-          <Popup>
-            <div>Sensor 2 - [39.93045, 23.72228]</div>
-          </Popup>
-        </Marker>
-        <Marker position={[39.9569, 23.6242]}>
-          <Popup>
-            <div>Sensor 3 - [39.9569, 23.6242]</div>
-          </Popup>
-        </Marker>
-      </MapContainer>
+      {/* TODO: Add a loading spinner */}
+      {mockLocationData && mockLocationData.length > 0 && (
+        <MapContainer
+          center={[39.9417, 23.6628]}
+          zoom={13}
+          scrollWheelZoom={true}
+          style={{ height: `calc(100vh - ${contentHeight})`, width: '100wh' }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          />
+          <Circle center={[39.9417, 23.6628]} fillColor='grey' radius={6000} />
+          68
+          <Circle center={[39.9417, 23.6628]} fillColor='blue' radius={25} />
+          {populateMapWithMarkers(selectedSensor)}
+        </MapContainer>
+      )}
     </Box>
   );
 };
