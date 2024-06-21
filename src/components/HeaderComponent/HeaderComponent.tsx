@@ -169,7 +169,7 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
                     },
                   }}
                 >
-                  Sensor
+                  {location == '/map' ? 'All Sensors' : 'None'}
                 </InputLabel>
                 <Select
                   labelId='select-small-label'
