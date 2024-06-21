@@ -1,10 +1,11 @@
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import { Box, Typography } from '@mui/material';
 import { useContext, useEffect, useRef, useState } from 'react';
-import 'leaflet/dist/leaflet.css';
 import { SensorContext } from '../../contexts/SensorContext';
 import { SensorLocationDataType } from '../../interfaces/SensorLocationData.interface';
+import 'leaflet/dist/leaflet.css';
 
 /**
  * Map Page View
@@ -17,13 +18,26 @@ const MapPage = (): JSX.Element => {
 
   const [contentHeight, setContentHeight] = useState<string>('100px');
 
+  const navigate = useNavigate();
+
+  // Trigger a redirection to the clicked sensor, while also changing the currently active sensor in the context
+  const handleOnClick = (event: React.MouseEvent) => {
+    const newSensorSelection = String((event.target as HTMLLinkElement).id);
+
+    // Change the context only if the sensor is not already selected
+    if (selectedSensor !== newSensorSelection)
+      setSelectedSensor(newSensorSelection || '');
+
+    navigate('/status');
+  };
+
   const selectedSensorContext = useContext(SensorContext);
 
   if (!selectedSensorContext) {
     throw new Error('There was something wrong with the Sensor Provider');
   }
 
-  const { selectedSensor } = selectedSensorContext;
+  const { selectedSensor, setSelectedSensor } = selectedSensorContext;
 
   const [mockLocationData, setMockLocationData] = useState<
     SensorLocationDataType[]
@@ -68,8 +82,15 @@ const MapPage = (): JSX.Element => {
             >
               <Popup>
                 <div>
-                  {mockSensorItem.designation}:{' '}
-                  {(mockSensorItem.coordinates as [number, number])[0]}N -{' '}
+                  {' '}
+                  {index == 0 ? (
+                    mockSensorItem.designation
+                  ) : (
+                    <a id={mockSensorItem.id} onClick={handleOnClick}>
+                      {mockSensorItem.designation}
+                    </a>
+                  )}
+                  : {(mockSensorItem.coordinates as [number, number])[0]}N -{' '}
                   {(mockSensorItem.coordinates as [number, number])[1]}W
                 </div>
               </Popup>
@@ -99,7 +120,13 @@ const MapPage = (): JSX.Element => {
               >
                 <Popup>
                   <div>
-                    {mockLocationData[Number(selectedSensor)].designation}:{' '}
+                    <a
+                      id={mockLocationData[Number(selectedSensor)].id}
+                      onClick={handleOnClick}
+                    >
+                      {mockLocationData[Number(selectedSensor)].designation}
+                    </a>
+                    :{' '}
                     {
                       (
                         mockLocationData[Number(selectedSensor)]
