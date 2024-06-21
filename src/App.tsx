@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 import { SensorProvider } from './contexts/SensorContext';
 import AppContainerComponent from './components/AppContainerComponent/AppContainerComponent';
 import SidebarComponent from './components/SidebarComponent/SidebarComponent';
@@ -10,9 +11,9 @@ import MainContentContainer from './components/MainContentContainerComponent/Mai
 import DeviceStatusPage from './pages/DeviceStatusPage/DeviceStatusPage';
 import HomePage from './pages/HomePage/HomePage';
 import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructionPage';
-import './App.css';
-import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackComponent from './components/ErrorFallbackComponent/ErrorFallbackComponent';
+import MapPage from './pages/MapPage/MapPage';
+import './App.css';
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -39,10 +40,7 @@ function App() {
               >
                 <Routes>
                   <Route path='/' element={<HomePage />} />
-                  <Route
-                    path='/map'
-                    element={<UnderConstructionPage page='Map View' />}
-                  />
+                  <Route path='/map' element={<MapPage />} />
                   <Route path='/status' element={<DeviceStatusPage />} />
                   <Route
                     path='/proximity'
