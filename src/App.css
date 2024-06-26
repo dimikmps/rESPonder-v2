@@ -2,30 +2,11 @@ body {
   overflow-x: hidden;
 }
 
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-} */
-
-/* html {
-  height: 100%;
-  width: 100%;
+/* Removes any background in form fields when selecting from autocomplete values */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: #000 !important;
 }
-
-body {
-  height: 100%;
-  width: 100%;
-}
-
-div#root {
-  height: 100%;
-  width: 100%;
-  padding: 0 30px;
-}
-
-div.app {
-  height: 100%;
-  width: 100%;
-} */
