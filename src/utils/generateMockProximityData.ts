@@ -76,8 +76,8 @@ const generateUserProximityData = (id: string): UserDeviceData[] => {
       return [generateUser1Distances(), generateUser2Distances()];
     case '2':
       return [
-        generateUser1Distances(),
         generateUser2Distances(),
+        generateUser3Distances(),
         generateUser4Distances(),
       ];
     case '3':
