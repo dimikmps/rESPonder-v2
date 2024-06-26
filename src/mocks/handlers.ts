@@ -34,4 +34,11 @@ export const handlers = [
       generateMockProximityData(Array.isArray(id) ? id[0] : id),
     );
   }),
+
+  // Get coordinates data for all sensors
+  http.get('http://localhost:5173/api/v1/sensor-locations', async () => {
+    // Wait for 333ms before responding to make the showcase more realistic
+    await delay(333);
+    return HttpResponse.json(generateMockLocationData());
+  }),
 ];
