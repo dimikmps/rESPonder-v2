@@ -32,7 +32,7 @@ interface HeaderProps
     Omit<MainAppBarProps, PropsToOmit> {}
 
 interface StyledDropdownProps extends InputBaseProps {
-  isHomepage: boolean;
+  isNotPrimarySection: boolean;
 }
 
 const Header = styled(MuiAppBar, {
@@ -55,8 +55,8 @@ const Header = styled(MuiAppBar, {
 }));
 
 const CustomisedInput = styled(InputBase, {
-  shouldForwardProp: (prop) => prop !== 'isHomepage',
-})<StyledDropdownProps>(({ theme, isHomepage }) => ({
+  shouldForwardProp: (prop) => prop !== 'isNotPrimarySection',
+})<StyledDropdownProps>(({ theme, isNotPrimarySection }) => ({
   '& .MuiInputBase-input': {
     textAlign: 'center',
     borderRadius: 25,
@@ -67,7 +67,7 @@ const CustomisedInput = styled(InputBase, {
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
     },
   },
-  '&:hover': !isHomepage
+  '&:hover': !isNotPrimarySection
     ? {
         borderRadius: 25,
         boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
@@ -87,7 +87,9 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
   // Deduce if user is on homepage so that thhe device dropdown and styling is disabled
   const location = String(useLocation().pathname);
 
-  const isHomePage = location === '/';
+  // Checks if user is currently in one of the main app sections. Helps disable the dropdown on pages like contact and homepage
+  const isNotPrimarySection =
+    location !== '/map' && location !== '/status' && location !== '/proximity';
 
   const selectedSensorContext = useContext(SensorContext);
 
@@ -158,7 +160,7 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
               <FormControl
                 size='small'
                 sx={{ width: '100%' }}
-                disabled={isHomePage}
+                disabled={isNotPrimarySection}
               >
                 <InputLabel
                   id='select-small-label'
@@ -181,7 +183,11 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
                   value={selectedSensor}
                   label='Sensor'
                   onChange={handleChange}
-                  input={<CustomisedInput isHomepage={isHomePage} />}
+                  input={
+                    <CustomisedInput
+                      isNotPrimarySection={isNotPrimarySection}
+                    />
+                  }
                   MenuProps={{
                     PaperProps: {
                       sx: {

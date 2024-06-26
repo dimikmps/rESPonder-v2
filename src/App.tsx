@@ -13,8 +13,9 @@ import HomePage from './pages/HomePage/HomePage';
 import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructionPage';
 import ErrorFallbackComponent from './components/ErrorFallbackComponent/ErrorFallbackComponent';
 import MapPage from './pages/MapPage/MapPage';
-import './App.css';
 import DeviceProximityPage from './pages/DeviceProximityPage/DeviceProximityPage';
+import ContactPage from './pages/ContactPage/ContactPage';
+import './App.css';
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -44,10 +45,7 @@ function App() {
                   <Route path='/map' element={<MapPage />} />
                   <Route path='/status' element={<DeviceStatusPage />} />
                   <Route path='/proximity' element={<DeviceProximityPage />} />
-                  <Route
-                    path='/contact'
-                    element={<UnderConstructionPage page='Contact' />}
-                  />
+                  <Route path='/contact' element={<ContactPage />} />
                   <Route
                     path='/about'
                     element={<UnderConstructionPage page='About' />}
