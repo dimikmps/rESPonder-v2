@@ -30,7 +30,7 @@ function App() {
       <CssBaseline />
 
       <SensorProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.VITE_BASE_URL}>
           <HeaderComponent open={drawerOpen} onToggle={handleDrawerToggle} />
 
           <SidebarComponent open={drawerOpen} onToggle={handleDrawerToggle} />
