@@ -10,7 +10,8 @@ const generateRandomNumberInRange = (min: number, max: number): string => {
   return result;
 };
 
-function generateRandomString(hashLength: number) {
+// Generates a hash-like ID
+const generateRandomString = (hashLength: number) => {
   let result = '';
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -19,12 +20,15 @@ function generateRandomString(hashLength: number) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
+};
 
+// Generate a unique hash-like userID
 const user1 = generateRandomString(10);
 const user2 = generateRandomString(10);
 const user3 = generateRandomString(10);
+const user4 = generateRandomString(10);
 
+// Generate mock distances for 4 fictional users
 const generateUser1Distances = (): UserDeviceData => {
   return {
     deviceId: user1,
@@ -35,7 +39,7 @@ const generateUser1Distances = (): UserDeviceData => {
   };
 };
 
-const generateUser2Distances = () => {
+const generateUser2Distances = (): UserDeviceData => {
   return {
     deviceId: user2,
     deviceAlias: 'Despoina',
@@ -45,7 +49,7 @@ const generateUser2Distances = () => {
   };
 };
 
-const generateUser3Distances = () => {
+const generateUser3Distances = (): UserDeviceData => {
   return {
     deviceId: user3,
     deviceAlias: 'Elias',
@@ -55,10 +59,43 @@ const generateUser3Distances = () => {
   };
 };
 
+const generateUser4Distances = (): UserDeviceData => {
+  return {
+    deviceId: user4,
+    deviceAlias: 'Kate',
+    d1: '',
+    d2: generateRandomNumberInRange(8.56, 9.22),
+    d3: generateRandomNumberInRange(10.56, 14.22),
+  };
+};
+
+// Generate mock data for each sensor
+const generateUserProximityData = (id: string): UserDeviceData[] => {
+  switch (id) {
+    case '1':
+      return [generateUser1Distances(), generateUser2Distances()];
+    case '2':
+      return [
+        generateUser1Distances(),
+        generateUser2Distances(),
+        generateUser4Distances(),
+      ];
+    case '3':
+      return [
+        generateUser1Distances(),
+        generateUser3Distances(),
+        generateUser4Distances(),
+      ];
+    default:
+      return [];
+  }
+};
+
 /**
  * generateMockResponse
  * Generates a mock response for a sensor
  * Currently supports up to 3 different mock responses (i.e. 3 devices) for presentation purposes
+ * Currently also incorporates 4 mock users registered to the system
  * @returns {SensorData} - Mock data for a single sensor
  */
 const generateMockResponse = (id: string): ProximityData | [] => {
@@ -67,13 +104,8 @@ const generateMockResponse = (id: string): ProximityData | [] => {
   }
 
   const result = {
-    id: String(id),
-    userDevices:
-      id == '1'
-        ? [generateUser1Distances(), generateUser2Distances()]
-        : id == '2'
-          ? [generateUser1Distances(), generateUser2Distances()]
-          : [generateUser1Distances(), generateUser3Distances()],
+    id: id,
+    userDevices: generateUserProximityData(id),
     ts: new Date().toLocaleString('en-GB'),
   };
 

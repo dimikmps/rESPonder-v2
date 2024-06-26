@@ -8,6 +8,7 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  TableSortLabel,
   Typography,
 } from '@mui/material';
 import PageTemplateComponent from '../../components/PageTemplateComponent/PageTemplateComponent';
@@ -77,6 +78,9 @@ const DeviceProximityPage = (): JSX.Element => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const [order, setOrder] = useState<'asc' | 'desc'>('asc');
+  const [orderBy, setOrderBy] = useState<keyof UserDeviceData>('deviceId');
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -86,6 +90,15 @@ const DeviceProximityPage = (): JSX.Element => {
   ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const handleRequestSort = (
+    event: React.MouseEvent<unknown>,
+    property: keyof UserDeviceData,
+  ) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
   };
 
   useEffect(() => {
@@ -140,6 +153,26 @@ const DeviceProximityPage = (): JSX.Element => {
     }
   }, [selectedSensor]);
 
+  const sortedData = mockData.sort((a, b) => {
+    if (orderBy === 'd1' || orderBy === 'd2' || orderBy === 'd3') {
+      const aValue = parseFloat(a[orderBy]);
+      const bValue = parseFloat(b[orderBy]);
+
+      const aIsEmpty = isNaN(aValue) || a[orderBy] === '';
+      const bIsEmpty = isNaN(bValue) || b[orderBy] === '';
+
+      if (aIsEmpty && !bIsEmpty) return 1;
+      if (!aIsEmpty && bIsEmpty) return -1;
+      if (aIsEmpty && bIsEmpty) return 0;
+
+      return order === 'asc' ? aValue - bValue : bValue - aValue;
+    } else {
+      return order === 'asc'
+        ? a[orderBy].localeCompare(b[orderBy])
+        : b[orderBy].localeCompare(a[orderBy]);
+    }
+  });
+
   return (
     <PageTemplateComponent pageTitle='Device Proximity Calculation'>
       {!selectedSensor || selectedSensor == '' ? (
@@ -162,14 +195,21 @@ const DeviceProximityPage = (): JSX.Element => {
                       key={column.id}
                       align={column.align}
                       style={{ minWidth: column.minWidth, fontWeight: '600' }}
+                      sortDirection={orderBy === column.id ? order : false}
                     >
-                      {column.label}
+                      <TableSortLabel
+                        active={orderBy === column.id}
+                        direction={orderBy === column.id ? order : 'asc'}
+                        onClick={(event) => handleRequestSort(event, column.id)}
+                      >
+                        {column.label}
+                      </TableSortLabel>
                     </TableCell>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {mockData
+                {sortedData
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => {
                     return (
