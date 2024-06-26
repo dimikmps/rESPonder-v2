@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { SensorContext } from '../../contexts/SensorContext';
 import PageTemplateComponent from '../../components/PageTemplateComponent/PageTemplateComponent';
 
@@ -16,8 +16,10 @@ const HomePage = (): JSX.Element => {
 
   const { setSelectedSensor } = selectedSensorContext;
 
-  // Reset selected sensor when visiting the homepage
-  setSelectedSensor('');
+  // Reset selected sensor when visiting the contact page
+  useEffect(() => {
+    setSelectedSensor('');
+  }, [setSelectedSensor]);
 
   return (
     <PageTemplateComponent>

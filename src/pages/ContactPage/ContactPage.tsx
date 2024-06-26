@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   TextField,
   Button,
@@ -41,7 +41,9 @@ const ContactPage: React.FC = () => {
   const { setSelectedSensor } = selectedSensorContext;
 
   // Reset selected sensor when visiting the contact page
-  setSelectedSensor('');
+  useEffect(() => {
+    setSelectedSensor('');
+  }, [setSelectedSensor]);
 
   const [formValues, setFormValues] = useState<CustomFormProps>({
     name: '',
