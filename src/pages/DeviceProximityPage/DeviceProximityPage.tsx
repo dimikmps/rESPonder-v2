@@ -88,136 +88,121 @@ const DeviceProximityPage = (): JSX.Element => {
     setPage(0);
   };
 
-  {
-    useEffect(() => {
-      // Clear previous data
-      setMockData([]);
+  useEffect(() => {
+    // Clear previous data
+    setMockData([]);
 
-      if (selectedSensor !== '') {
-        // Utilise abort signal to immediately stop any fetching once the sensor is switched
-        const fetchData = async (signal: AbortSignal) => {
-          try {
-            const response = await fetch(
-              `http://localhost:5173/api/v1/proximity/${selectedSensor}`,
-              { signal },
-            );
-            if (!response.ok) {
-              throw new Error('Failed to fetch data');
-            }
-            const data = await response.json();
-
-            const tempRowElement = data.userDevices.map(
-              (dataElement: UserDeviceData) => {
-                return createTableData(
-                  dataElement.deviceId,
-                  dataElement.deviceAlias,
-                  dataElement.d1,
-                  dataElement.d2,
-                  dataElement.d3,
-                );
-              },
-            );
-
-            setMockData(tempRowElement);
-          } catch (err) {
-            // Do nothing
+    if (selectedSensor !== '') {
+      // Utilise abort signal to immediately stop any fetching once the sensor is switched
+      const fetchData = async (signal: AbortSignal) => {
+        try {
+          const response = await fetch(
+            `http://localhost:5173/api/v1/proximity/${selectedSensor}`,
+            { signal },
+          );
+          if (!response.ok) {
+            throw new Error('Failed to fetch data');
           }
-        };
+          const data = await response.json();
 
-        const controller = new AbortController();
-        const signal = controller.signal;
+          const tempRowElement = data.userDevices.map(
+            (dataElement: UserDeviceData) => {
+              return createTableData(
+                dataElement.deviceId,
+                dataElement.deviceAlias,
+                dataElement.d1,
+                dataElement.d2,
+                dataElement.d3,
+              );
+            },
+          );
 
-        // Initial fetch
-        fetchData(signal);
+          setMockData(tempRowElement);
+        } catch (err) {
+          // Do nothing
+        }
+      };
 
-        // Set up interval to fetch data every 5 seconds
-        const interval = setInterval(() => fetchData(signal), 5000);
+      const controller = new AbortController();
+      const signal = controller.signal;
 
-        // Clean up: abort fetch and clear interval on component unmount or if selectedSensor changes
-        return () => {
-          controller.abort();
-          clearInterval(interval);
-        };
-      }
-    }, [selectedSensor]);
+      // Initial fetch
+      fetchData(signal);
 
-    return (
-      <PageTemplateComponent pageTitle='Device Proximity Calculation'>
-        {!selectedSensor || selectedSensor == '' ? (
-          <Typography
-            alignContent={'center'}
-            textAlign={'inherit'}
-            width='100%'
-          >
-            Please select a sensor to continue
-          </Typography>
-        ) : !mockData || mockData.length == 0 ? (
-          // TODO: Add a spinner or something
-          <Typography
-            alignContent={'center'}
-            textAlign={'inherit'}
-            width='100%'
-          >
-            Sensor data loading...
-          </Typography>
-        ) : (
-          <Box sx={{ width: '100%', height: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
-              <Table stickyHeader aria-label='sticky table'>
-                <TableHead>
-                  <TableRow>
-                    {columns.map((column) => (
-                      <TableCell
-                        key={column.id}
-                        align={column.align}
-                        style={{ minWidth: column.minWidth, fontWeight: '600' }}
-                      >
-                        {column.label}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {mockData
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row, index) => {
-                      return (
-                        <TableRow
-                          hover
-                          role='checkbox'
-                          tabIndex={-1}
-                          key={index}
-                        >
-                          {columns.map((column) => {
-                            const value = row[column.id];
-                            return (
-                              <TableCell key={column.id} align={column.align}>
-                                {column.format && typeof value === 'number'
-                                  ? column.format(value)
-                                  : value}
-                              </TableCell>
-                            );
-                          })}
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component='div'
-              count={mockData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Box>
-        )}
-      </PageTemplateComponent>
-    );
-  }
+      // Set up interval to fetch data every 5 seconds
+      const interval = setInterval(() => fetchData(signal), 5000);
+
+      // Clean up: abort fetch and clear interval on component unmount or if selectedSensor changes
+      return () => {
+        controller.abort();
+        clearInterval(interval);
+      };
+    }
+  }, [selectedSensor]);
+
+  return (
+    <PageTemplateComponent pageTitle='Device Proximity Calculation'>
+      {!selectedSensor || selectedSensor == '' ? (
+        <Typography alignContent={'center'} textAlign={'inherit'} width='100%'>
+          Please select a sensor to continue
+        </Typography>
+      ) : !mockData || mockData.length == 0 ? (
+        // TODO: Add a spinner or something
+        <Typography alignContent={'center'} textAlign={'inherit'} width='100%'>
+          Sensor data loading...
+        </Typography>
+      ) : (
+        <Box sx={{ width: '100%', height: '100%', overflow: 'hidden' }}>
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label='sticky table'>
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth, fontWeight: '600' }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {mockData
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    return (
+                      <TableRow hover role='checkbox' tabIndex={-1} key={index}>
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === 'number'
+                                ? column.format(value)
+                                : value}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component='div'
+            count={mockData.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Box>
+      )}
+    </PageTemplateComponent>
+  );
 };
 
 export default DeviceProximityPage;

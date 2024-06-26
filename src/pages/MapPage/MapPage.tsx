@@ -48,9 +48,7 @@ const MapPage = (): JSX.Element => {
   useEffect(() => {
     const fetchLocationData = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5173/api/v1/locations/`,
-        );
+        const response = await fetch(`http://localhost:5173/api/v1/locations/`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
