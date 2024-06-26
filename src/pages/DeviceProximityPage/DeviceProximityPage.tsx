@@ -81,7 +81,7 @@ const DeviceProximityPage = (): JSX.Element => {
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const [orderBy, setOrderBy] = useState<keyof UserDeviceData>('deviceId');
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (newPage: number) => {
     setPage(newPage);
   };
 
@@ -92,10 +92,7 @@ const DeviceProximityPage = (): JSX.Element => {
     setPage(0);
   };
 
-  const handleRequestSort = (
-    event: React.MouseEvent<unknown>,
-    property: keyof UserDeviceData,
-  ) => {
+  const handleRequestSort = (property: keyof UserDeviceData) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -200,7 +197,7 @@ const DeviceProximityPage = (): JSX.Element => {
                       <TableSortLabel
                         active={orderBy === column.id}
                         direction={orderBy === column.id ? order : 'asc'}
-                        onClick={(event) => handleRequestSort(event, column.id)}
+                        onClick={() => handleRequestSort(column.id)}
                       >
                         {column.label}
                       </TableSortLabel>
@@ -236,7 +233,7 @@ const DeviceProximityPage = (): JSX.Element => {
             count={mockData.length}
             rowsPerPage={rowsPerPage}
             page={page}
-            onPageChange={handleChangePage}
+            onPageChange={() => handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Box>
