@@ -10,6 +10,7 @@ const generateRandomNumberInRange = (min: number, max: number) => {
 /**
  * generateMockDeviceStatusData
  * Generates a mock response for a sensor
+ * Replicates the exact data schema as the one used in the original rESPonder implementation
  * Currently supports up to 3 different mock responses (i.e. 3 devices) for presentation purposes
  * @returns {SensorData} - Mock data for a single sensor
  */
@@ -41,11 +42,32 @@ const generateMockDeviceStatusData = (id: string): SensorData | [] => {
         : id == '2'
           ? [
               {
+                dev: 'Despoina',
+                rssi: '-' + generateRandomNumberInRange(70, 80),
+              },
+              {
+                dev: 'Kate',
+                rssi: '-' + generateRandomNumberInRange(55, 65),
+              },
+              {
                 dev: 'Elias',
                 rssi: '-' + generateRandomNumberInRange(45, 50),
               },
             ]
-          : [],
+          : [
+              {
+                dev: 'Dimitris',
+                rssi: '-' + generateRandomNumberInRange(70, 80),
+              },
+              {
+                dev: 'Elias',
+                rssi: '-' + generateRandomNumberInRange(55, 65),
+              },
+              {
+                dev: 'Kate',
+                rssi: '-' + generateRandomNumberInRange(45, 50),
+              },
+            ],
     ts: new Date().toLocaleString('en-GB'),
   };
 };
