@@ -6,18 +6,14 @@ import theme from './theme/theme.ts';
 import './index.css';
 
 async function enableMocking() {
-  /* Use this if we want to separate processes for local deployment only.
-     The current implementation is a showcase and is based on mock data in production mode as well.
-  */
-  /*
-    if (process.env.NODE_ENV !== 'development') {
-      return;
-    }
-  */
+  if (
+    process.env.NODE_ENV === 'development' ||
+    process.env.NODE_ENV === 'production'
+  ) {
+    const { worker } = await import('./mocks/browser.ts');
 
-  const { worker } = await import('./mocks/browser.ts');
-
-  return worker.start();
+    return worker.start();
+  }
 }
 
 enableMocking().then(() => {
