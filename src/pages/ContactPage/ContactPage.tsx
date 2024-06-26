@@ -10,7 +10,6 @@ import {
   DialogActions,
 } from '@mui/material';
 import PageTemplateComponent from '../../components/PageTemplateComponent/PageTemplateComponent';
-import '../../App.css';
 import { SensorContext } from '../../contexts/SensorContext';
 
 interface CustomFormProps {
@@ -64,10 +63,10 @@ const ContactPage: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
+    setFormValues((prevValues) => ({
+      ...prevValues,
       [name]: value,
-    });
+    }));
   };
 
   const validateEmail = (email: string) => {
