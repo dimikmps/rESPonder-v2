@@ -14,6 +14,7 @@ import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructi
 import ErrorFallbackComponent from './components/ErrorFallbackComponent/ErrorFallbackComponent';
 import MapPage from './pages/MapPage/MapPage';
 import './App.css';
+import DeviceProximityPage from './pages/DeviceProximityPage/DeviceProximityPage';
 
 function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -42,12 +43,7 @@ function App() {
                   <Route path='/' element={<HomePage />} />
                   <Route path='/map' element={<MapPage />} />
                   <Route path='/status' element={<DeviceStatusPage />} />
-                  <Route
-                    path='/proximity'
-                    element={
-                      <UnderConstructionPage page='Device proximity view' />
-                    }
-                  />
+                  <Route path='/proximity' element={<DeviceProximityPage />} />
                   <Route
                     path='/contact'
                     element={<UnderConstructionPage page='Contact' />}

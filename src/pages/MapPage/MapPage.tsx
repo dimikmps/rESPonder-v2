@@ -49,7 +49,7 @@ const MapPage = (): JSX.Element => {
     const fetchLocationData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5173/api/v1/sensor-locations/`,
+          `http://localhost:5173/api/v1/locations/`,
         );
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -166,7 +166,7 @@ const MapPage = (): JSX.Element => {
         Map View
       </Typography>
 
-      {/* TODO: Add a loading spinner */}
+      {/* TODO: Add a spinner or something */}
       {mockLocationData && mockLocationData.length > 0 && (
         <MapContainer
           center={[39.9417, 23.6628]}
