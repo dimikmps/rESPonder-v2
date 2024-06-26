@@ -63,7 +63,7 @@ const DeviceStatusPage = (): JSX.Element => {
   }, [selectedSensor]);
 
   return (
-    <PageTemplateComponent pageTitle='Sensor data streaming'>
+    <PageTemplateComponent pageTitle='Latest Sensor Readings'>
       {!selectedSensor || selectedSensor == '' ? (
         <Typography alignContent={'center'} textAlign={'inherit'} width='100%'>
           Please select a sensor to continue
