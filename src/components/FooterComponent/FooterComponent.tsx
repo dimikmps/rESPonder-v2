@@ -24,6 +24,7 @@ const FooterComponent = (): JSX.Element => {
           color='inherit'
           underline='none'
           href='https://www.linkedin.com/in/dkampas/'
+          target='_blank'
         >
           Dimitris Kampas
         </Link>

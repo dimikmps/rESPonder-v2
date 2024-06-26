@@ -10,11 +10,12 @@ import FooterComponent from './components/FooterComponent/FooterComponent';
 import MainContentContainer from './components/MainContentContainerComponent/MainContentContainerComponent';
 import DeviceStatusPage from './pages/DeviceStatusPage/DeviceStatusPage';
 import HomePage from './pages/HomePage/HomePage';
-import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructionPage';
 import ErrorFallbackComponent from './components/ErrorFallbackComponent/ErrorFallbackComponent';
 import MapPage from './pages/MapPage/MapPage';
 import DeviceProximityPage from './pages/DeviceProximityPage/DeviceProximityPage';
 import ContactPage from './pages/ContactPage/ContactPage';
+import AboutPage from './pages/AboutPage/AboutPage';
+// import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructionPage';
 import './App.css';
 
 function App() {
@@ -46,10 +47,7 @@ function App() {
                   <Route path='/status' element={<DeviceStatusPage />} />
                   <Route path='/proximity' element={<DeviceProximityPage />} />
                   <Route path='/contact' element={<ContactPage />} />
-                  <Route
-                    path='/about'
-                    element={<UnderConstructionPage page='About' />}
-                  />
+                  <Route path='/about' element={<AboutPage />} />
                 </Routes>
               </ErrorBoundary>
             }
