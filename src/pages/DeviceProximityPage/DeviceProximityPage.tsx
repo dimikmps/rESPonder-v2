@@ -174,7 +174,7 @@ const DeviceProximityPage = (): JSX.Element => {
   });
 
   return (
-    <PageTemplateComponent pageTitle='Device Proximity Calculation'>
+    <PageTemplateComponent pageTitle='Device Proximity'>
       {!selectedSensor || selectedSensor == '' ? (
         <Typography alignContent={'center'} textAlign={'inherit'} width='100%'>
           Please select a sensor to continue

@@ -18,7 +18,7 @@ import SideBarItem from './SideBarItemComponent';
 const mainMenuItems: string[] = [
   'Map View',
   'Latest Sensor Readings',
-  'Proximity approximation',
+  'Device Proximity',
 ];
 
 // List of secondary menu items to be presented in the sidebar

@@ -158,7 +158,7 @@ Follow the steps below to get the project up and running:
   - [x] Map view
   - [x] Indoor positioning view
   - [x] Contact view
-  - [ ] About view
+  - [x] About view
 - [x] Multiple sensors handling
   - [x] Extend API
   - [x] Create Context 
