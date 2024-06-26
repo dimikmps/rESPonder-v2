@@ -8,12 +8,12 @@ const generateRandomNumberInRange = (min: number, max: number) => {
 };
 
 /**
- * generateMockResponse
+ * generateMockDeviceStatusData
  * Generates a mock response for a sensor
  * Currently supports up to 3 different mock responses (i.e. 3 devices) for presentation purposes
  * @returns {SensorData} - Mock data for a single sensor
  */
-const generateMockResponse = (id: string): SensorData | [] => {
+const generateMockDeviceStatusData = (id: string): SensorData | [] => {
   if (Number(id) > 3) {
     return [];
   }
@@ -50,4 +50,4 @@ const generateMockResponse = (id: string): SensorData | [] => {
   };
 };
 
-export default generateMockResponse;
+export default generateMockDeviceStatusData;
