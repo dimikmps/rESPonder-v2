@@ -155,7 +155,7 @@ The displayed data is updated every five seconds and corresponds to the sensor c
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] App foundational components
+- [x] App-wide Components
   - [x] Add Main content component 
   - [x] Add Header component
   - [x] Add Footer component
@@ -164,14 +164,14 @@ The displayed data is updated every five seconds and corresponds to the sensor c
 - [x] Linting/formatting
   - [x] Add formatting configuration
   - [x] Add pre-commit linting and formatting
-- [x] App pages
-  - [x] Homepage page
-  - [x] Latest Sensor Readings page
-  - [x] Map page
-  - [x] Device Proximity page
-  - [x] Contact page
-  - [x] About page
-- [x] Sensor Data
+- [x] App Pages/Views
+  - [x] Add Homepage
+  - [x] Add Sensor Readings page
+  - [x] Add Map page
+  - [x] Add Device Proximity page
+  - [x] Add Contact page
+  - [x] Add About page
+- [x] API/Sensor Data
   - [x] Create data interfaces as per original rESPonder imlementation
   - [x] Create mock API to fetch sensor streaming data
   - [x] Create mock API to fetch map-related data
