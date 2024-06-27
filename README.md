@@ -128,7 +128,7 @@ Follow the steps below to get the project up and running:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-##### Map View
+#### Map View
 This section displays the current locations of sensors deployed in the Paliouri, Chalkidiki (GR) area, which was selected for the experimental deployment in the original implementation. Users can view all deployed sensors or select a specific one from the main dropdown menu.
 
 A central node, located on a government building, is always visible on the map. This node relays sensor data from nearby areas to the cloud-based (AWS) back-end service. The blue circle on the map represents a 6km radius, indicating the optimal LoRa communication range.
@@ -139,10 +139,10 @@ The main dropdown menu allows users to choose between displaying each of the thr
 
 Sensor data is retrieved and updated every second.
 
-##### Latest Sensor Readings
+#### Latest Sensor Readings
 This section provides real-time streaming data from the sensors, including the number of registered and unregistered devices near the selected sensor. Users can choose to display data for a specific sensor via the dropdown menu. The data is updated every second.
 
-##### Device Proximity (experimental)
+#### Device Proximity (experimental)
 This section displays RSSI-based proximity data, calculated by AWS Lambda every five seconds. It includes information about pre-registered devices near each sensor and offers sorting capabilities through a table to help identify the closest registered devices (and potential users) in the area.
 
 The displayed data is updated every five seconds and corresponds to the sensor currently selected via the main dropdown menu. Any device present in the selected sensor's proximity will appear in the table.
