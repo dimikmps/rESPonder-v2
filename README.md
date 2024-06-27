@@ -18,8 +18,6 @@
   <h3 align="center">rESPonder v.2</h3>
  <h5>An IoT application for disaster rescue scenarios</h5>
   <p align="center">
-    <a href="#e">View the live Demo</a> (under construction)
-      ·
     <a href="https://www.youtube.com/watch?v=HHvTUP_yY_8&list=PLxXfXAgRtgEk2D5dS9H7aLmjYhCL_8AUJ">Check out the presentation (GR)</a>
     ·
     <a href="https://github.com/dimikmps/rESPonder-v2/issues/new?labels=bug">Report Bug</a>
@@ -67,6 +65,7 @@ The current (v2) implementation is an updated version of the original front-end,
 - Implementation of Mock Service Worker to periodically fetch randomized sensor data, simulating data retrieval from the original deployment of ESP sensors and AWS infrastructure (which is no longer active).
 - Utilization of React Router for routing and re-rendering only the content element, maintaining consistency across foundational elements such as the header and sidebar.
 - Integration of the Context API to manage information such as the selected sensor throughout various sections of the application. Secondary logic relies on efficient context handling for data flow and state management.
+- Integration of Leaflet for the purpose of displaying sensor locations and data on a real-world map.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -79,8 +78,8 @@ The current (v2) implementation is an updated version of the original front-end,
 * [![Vite][Vite]][Vite-url]
 * [![MUI][MUI]][MUI-url]
 * [![REACTROUTER][REACTROUTER]][REACTROUTER-url]
-* [![MSWWorker][MSW]][MSW-url]
 * [![REACTLEAFLET][REACTLEAFLET]][REACTLEAFLET-url]
+* [![MSWWorker][MSW]][MSW-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -129,8 +128,24 @@ Follow the steps below to get the project up and running:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-*under construction*
+##### Map View
+This section displays the current locations of sensors deployed in the Paliouri, Chalkidiki (GR) area, which was selected for the experimental deployment in the original implementation. Users can view all deployed sensors or select a specific one from the main dropdown menu.
 
+A central node, located on a government building, is always visible on the map. This node relays sensor data from nearby areas to the cloud-based (AWS) back-end service. The blue circle on the map represents a 6km radius, indicating the optimal LoRa communication range.
+
+Clicking on each sensor icon provides additional information, such as its coordinates and a link to the specific sensor's data streaming page.
+
+The main dropdown menu allows users to choose between displaying each of the three deployed sensors individually or all sensors simultaneously.
+
+Sensor data is retrieved and updated every second.
+
+##### Latest Sensor Readings
+This section provides real-time streaming data from the sensors, including the number of registered and unregistered devices near the selected sensor. Users can choose to display data for a specific sensor via the dropdown menu. The data is updated every second.
+
+##### Device Proximity (experimental)
+This section displays RSSI-based proximity data, calculated by AWS Lambda every five seconds. It includes information about pre-registered devices near each sensor and offers sorting capabilities through a table to help identify the closest registered devices (and potential users) in the area.
+
+The displayed data is updated every five seconds and corresponds to the sensor currently selected via the main dropdown menu. Any device present in the selected sensor's proximity will appear in the table.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -140,7 +155,7 @@ Follow the steps below to get the project up and running:
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] App layout
+- [x] App foundational components
   - [x] Add Main content component 
   - [x] Add Header component
   - [x] Add Footer component
@@ -149,21 +164,24 @@ Follow the steps below to get the project up and running:
 - [x] Linting/formatting
   - [x] Add formatting configuration
   - [x] Add pre-commit linting and formatting
+- [x] App pages
+  - [x] Homepage page
+  - [x] Latest Sensor Readings page
+  - [x] Map page
+  - [x] Device Proximity page
+  - [x] Contact page
+  - [x] About page
 - [x] Sensor Data
-  - [x] Create mock/randomized sensor data to be used for the purpose of the live demo
-  - [x] Create mock API to fetch sensor data
-- [ ] App sections
-  - [x] Homepage view
-  - [x] Latest sensor readings view
-  - [x] Map view
-  - [x] Indoor positioning view
-  - [x] Contact view
-  - [x] About view
+  - [x] Create data interfaces as per original rESPonder imlementation
+  - [x] Create mock API to fetch sensor streaming data
+  - [x] Create mock API to fetch map-related data
+  - [x] Create mock API to fetch proximity-related data
 - [x] Multiple sensors handling
-  - [x] Extend API
-  - [x] Create Context 
-  - [x] Refactor pages to acommodate changes
-- [ ] Demo Deployment
+  - [x] Create selected sensor Context 
+  - [x] Extend APIs
+  - [x] Refactor pages/components to acommodate changes
+
+
 
 See the [open issues](https://github.com/dimikmps/rESPonder-v2/issues) for a full list of proposed features (and known issues).
 
