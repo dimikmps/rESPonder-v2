@@ -88,8 +88,8 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
   const location = String(useLocation().pathname);
 
   // Checks if user is currently in one of the main app sections. Helps disable the dropdown on pages like contact and homepage
-  const isNotPrimarySection =
-    location !== '/map' && location !== '/status' && location !== '/proximity';
+  const isPrimarySection =
+    location == '/map' || location == '/status' || location == '/proximity';
 
   const selectedSensorContext = useContext(SensorContext);
 
@@ -160,7 +160,7 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
               <FormControl
                 size='small'
                 sx={{ width: '100%' }}
-                disabled={isNotPrimarySection}
+                disabled={!isPrimarySection}
               >
                 <InputLabel
                   id='select-small-label'
@@ -171,10 +171,10 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
                     },
                   }}
                 >
-                  {location == '/map'
-                    ? 'All Sensors'
-                    : location == '/'
-                      ? ''
+                  {!isPrimarySection
+                    ? ''
+                    : location == '/map'
+                      ? 'All Sensors'
                       : 'None'}
                 </InputLabel>
                 <Select
@@ -184,9 +184,7 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
                   label='Sensor'
                   onChange={handleChange}
                   input={
-                    <CustomisedInput
-                      isNotPrimarySection={isNotPrimarySection}
-                    />
+                    <CustomisedInput isNotPrimarySection={!isPrimarySection} />
                   }
                   MenuProps={{
                     PaperProps: {
@@ -200,8 +198,13 @@ const HeaderComponent = ({ open, onToggle }: MainAppBarProps): JSX.Element => {
                   }}
                 >
                   <MenuItem value={''}>
-                    {' '}
-                    <em>{location == '/map' ? 'All Sensors' : 'None'}</em>
+                    <em>
+                      {!isPrimarySection
+                        ? ''
+                        : location == '/map'
+                          ? 'All Sensors'
+                          : 'None'}
+                    </em>
                   </MenuItem>
                   <MenuItem value={1}>Sensor 1</MenuItem>
                   <MenuItem value={2}>Sensor 2</MenuItem>
