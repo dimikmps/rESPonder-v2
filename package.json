@@ -6,14 +6,11 @@
   "homepage": "https://dimikmps.github.io/rESPonder-v2",
   "scripts": {
     "start": "vite",
-    "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "prettier": "prettier ./src --write",
     "lint": "eslint ./src",
-    "prepare": "husky",
-    "predeploy": "vite build && msw init dist",
-    "deploy": "gh-pages -d dist"
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -22,7 +19,6 @@
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.18",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
-    "gh-pages": "^6.1.1",
     "leaflet": "^1.9.4",
     "lts": "^1.2.0",
     "react": "^18.3.1",
