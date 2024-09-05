@@ -15,9 +15,11 @@
 
 <br />
 <div align="center">
-  <h3 align="center">rESPonder v.2</h3>
+  <h3 align="center">rESPonder v2.0</h3>
  <h5>An IoT application for disaster rescue scenarios</h5>
   <p align="center">
+   <a href="https://responderv2.netlify.app/">Try the Live Demo</a>
+   ·
     <a href="https://www.youtube.com/watch?v=HHvTUP_yY_8&list=PLxXfXAgRtgEk2D5dS9H7aLmjYhCL_8AUJ">Check out the presentation (GR)</a>
     ·
     <a href="https://github.com/dimikmps/rESPonder-v2/issues/new?labels=bug">Report Bug</a>
