@@ -32,7 +32,6 @@ const AboutPage: React.FC = () => {
         px={theme.spacing(8)}
         display='flex'
         flexDirection='column'
-        justifyContent='space-around'
       >
         <Typography align='left'>
           This application provides sensor-derived data to assist in locating
