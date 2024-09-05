@@ -5,7 +5,7 @@ import { Box, Typography } from '@mui/material';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { SensorContext } from '../../contexts/SensorContext';
 import { SensorLocationDataType } from '../../interfaces/SensorLocationData.interface';
-import 'leaflet/dist/leaflet.css';
+// import 'leaflet/dist/leaflet.css';
 
 /**
  * Map Page View
